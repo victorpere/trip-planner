@@ -13,6 +13,7 @@ const HeaderUser = () => {
   if (auth.isAuthenticated) {
     return (
       <div>
+        <div>{auth.user?.profile.name}</div>
         <Link to="/signout">SIGN OUT</Link>
       </div>
     );

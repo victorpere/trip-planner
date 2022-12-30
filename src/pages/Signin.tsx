@@ -5,7 +5,7 @@ const Signin = () => {
   const auth = useAuth();
 
   useEffect(() => {
-    if (!auth.isLoading && !auth.isAuthenticated) {
+    if (!auth.activeNavigator && !auth.isLoading && !auth.isAuthenticated) {
       auth.signinRedirect();
     }
   }, [auth]);
