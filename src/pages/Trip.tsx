@@ -1,6 +1,6 @@
 import React from "react";
 
-const Trip: React.FC<{tripId: string}> = ({tripId}) => {
+const Trip: React.FC = () => {
   return <div>Trip</div>;
 };
 

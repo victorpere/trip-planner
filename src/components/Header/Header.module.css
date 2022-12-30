@@ -1,0 +1,32 @@
+.header {
+    padding-left: var(--padding-main);
+    padding-right: var(--padding-main);
+    margin-bottom: 1rem;
+    background-color: orange;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    color: white;
+  }
+  
+  .header-content {
+    margin: auto;
+    max-width: var(--base-width);
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+  }
+  
+  .header-item {
+    margin-top: auto;
+    margin-bottom: auto;
+    grid-row: 1;
+  }
+  
+  .header-item-left {
+    grid-column: 1;
+  }
+  
+  .header-item-right {
+    margin-left: auto;
+    grid-column: 2;
+  }
+  
