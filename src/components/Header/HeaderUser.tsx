@@ -4,9 +4,7 @@ import { useAuth } from "react-oidc-context";
 const HeaderUser = () => {
   const auth = useAuth();
 
-    console.log(auth);
-
-  if (auth.isLoading) {
+  if (auth.isLoading || auth.activeNavigator) {
     return <div>Loading...</div>;
   }
 
