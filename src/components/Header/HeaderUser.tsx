@@ -11,8 +11,10 @@ const HeaderUser = () => {
   if (auth.isAuthenticated) {
     return (
       <div>
-        <div>{auth.user?.profile.name}</div>
-        <Link to="/signout">SIGN OUT</Link>
+        <div>{auth.user?.profile.name ?? auth.user?.profile.email}</div>
+        <div className="float-right">
+          <Link to="/signout">Sign out</Link>
+        </div>
       </div>
     );
   }
@@ -20,7 +22,7 @@ const HeaderUser = () => {
   // return <button onClick={() => void auth.signinRedirect()}>Log in</button>;
   return (
     <div>
-      <Link to="/signin">SIGN IN</Link>
+      <Link to="/signin">Sign in</Link>
     </div>
   );
 };

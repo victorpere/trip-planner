@@ -36,3 +36,6 @@
     text-decoration: underline;
   }
   
+  .float-right {
+    float: right;
+  }
