@@ -11,7 +11,7 @@ const HeaderUser = () => {
   if (auth.isAuthenticated) {
     return (
       <div>
-        <div>{auth.user?.profile.name ?? auth.user?.profile.email}</div>
+        <div>{auth.user?.profile.given_name ?? auth.user?.profile.name ?? auth.user?.profile.email}</div>
         <div className="float-right">
           <Link to="/signout">Sign out</Link>
         </div>
