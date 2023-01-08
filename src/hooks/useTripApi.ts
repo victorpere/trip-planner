@@ -6,6 +6,7 @@ import { TripApi } from "../modules/TripApi";
 
 const useTripApi = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const auth = useAuth();
   const tripApi = useMemo(
     () => new TripApi(new GenericApi(process.env.REACT_APP_API_URL!)),
@@ -22,7 +23,11 @@ const useTripApi = () => {
           auth.user!.access_token
         );
 
-        setTrips(response["data"]);
+        setTrips(response.trips);
+
+        if (response.error) {
+          setError(response.error);
+        }
       }
 
       setIsLoading(false);
@@ -32,6 +37,7 @@ const useTripApi = () => {
 
   return {
     isLoading,
+    error,
     getOwnTrips,
   };
 };

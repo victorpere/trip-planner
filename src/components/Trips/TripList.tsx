@@ -8,7 +8,7 @@ import TripListItem from "./TripListItem";
 const TripList = () => {
   const { isAuthenticated } = useAuth();
   const [myTrips, setMyTrips] = useState<Trip[]>([]);
-  const { isLoading, getOwnTrips } = useTripApi();
+  const { isLoading, error, getOwnTrips } = useTripApi();
 
   useEffect(() => {
     getOwnTrips(setMyTrips);
@@ -20,6 +20,10 @@ const TripList = () => {
 
   if (isLoading) {
     return <Card>LOADING...</Card>;
+  }
+
+  if (error) {
+    return <Card>{error}</Card>;
   }
 
   return (

@@ -17,8 +17,7 @@ export class GenericApi implements Api {
       headers: headers,
     });
     console.log(response);
-    const data = await response.json();
-    return data;
+    return response;
   }
   post(route: string, params: {}, headers: {}, body: {}): Promise<Response> {
     throw new Error("Method not implemented.");
