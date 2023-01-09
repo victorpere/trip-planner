@@ -7,6 +7,12 @@ type TripsResponse = {
   error?: string;
 };
 
+type TripDetailsResponse = {
+  trip?: Trip;
+  editable?: boolean;
+  error?: string;
+};
+
 export class TripApi {
   private api: Api;
 
@@ -31,6 +37,29 @@ export class TripApi {
       return { trips: [], error: response.statusText };
     } catch (e: any) {
       return { trips: [], error: e.message };
+    }
+  }
+
+  async getTripDetails(
+    tripId: string,
+    token?: string
+  ): Promise<TripDetailsResponse> {
+    const route = token ? `/trips/${tripId}` : `/public/trips/${tripId}`;
+    const headers = token ? { ...authHeader(token) } : {};
+
+    try {
+      const response = await this.api.get(route, {}, headers);
+
+      if (response.ok) {
+        const body = await response.json();
+        if (body["data"]) {
+          return { trip: body["data"], editable: body["editable"] };
+        }
+      }
+
+      return { error: response.statusText };
+    } catch (e: any) {
+      return { error: e.message };
     }
   }
 }

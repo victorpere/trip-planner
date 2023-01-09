@@ -1,0 +1,4 @@
+.main-content {
+  margin: auto;
+  max-width: var(--base-width);
+}

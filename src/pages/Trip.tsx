@@ -1,7 +1,15 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import TripDetails from "../components/Trips/TripDetails";
 
-const Trip: React.FC = () => {
-  return <div>Trip</div>;
+const Trip = () => {
+  const { tripId } = useParams<{ tripId: string }>();
+
+  return (
+    <>
+      <TripDetails tripId={tripId} />
+    </>
+  );
 };
 
 export default Trip;

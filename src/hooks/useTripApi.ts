@@ -35,10 +35,31 @@ const useTripApi = () => {
     [auth.isAuthenticated, auth.user, tripApi]
   );
 
+  const getTripDetails = useCallback(
+    async (tripId: string, setTrip: (trip?: Trip) => void) => {
+      setIsLoading(true);
+
+      const response = await tripApi.getTripDetails(
+        tripId,
+        auth.user?.access_token
+      );
+
+      setTrip(response.trip);
+
+      if (response.error) {
+        setError(response.error);
+      }
+
+      setIsLoading(false);
+    },
+    [auth.user, tripApi]
+  );
+
   return {
     isLoading,
     error,
     getOwnTrips,
+    getTripDetails,
   };
 };
 
