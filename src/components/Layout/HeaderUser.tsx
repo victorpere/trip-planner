@@ -12,7 +12,7 @@ const HeaderUser = () => {
     return (
       <div>
         <div>{auth.user?.profile.given_name ?? auth.user?.profile.name ?? auth.user?.profile.email}</div>
-        <div className="float-right">
+        <div>
           <Link to="/signout">Sign out</Link>
         </div>
       </div>

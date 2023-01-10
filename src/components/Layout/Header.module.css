@@ -28,5 +28,6 @@
   .header-item-right {
     margin-left: auto;
     grid-column: 2;
+    text-align: right;
   }
   
