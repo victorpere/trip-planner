@@ -1,18 +1,12 @@
 import { Api } from "./Api";
 
-export class GenericApi implements Api {
-  baseUrl: string;
-
-  constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
-  }
-
+export class ApiService implements Api {
   async get(route: string, params: {}, headers: {}): Promise<Response> {
     console.log("api.get");
     console.log(route);
     console.log(params);
     console.log(headers);
-    const response = await fetch(this.baseUrl + route, {
+    const response = await fetch(route, {
       method: "GET",
       headers: headers,
     });

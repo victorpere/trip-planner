@@ -14,6 +14,7 @@ type TripDetailsResponse = {
 };
 
 export class TripApi {
+  private readonly baseUrl = process.env.REACT_APP_API_URL!;
   private api: Api;
 
   constructor(api: Api) {
@@ -25,7 +26,7 @@ export class TripApi {
     const headers = { ...authHeader(token) };
 
     try {
-      const response = await this.api.get(route, {}, headers);
+      const response = await this.api.get(this.baseUrl + route, {}, headers);
 
       if (response.ok) {
         const body = await response.json();
@@ -48,7 +49,7 @@ export class TripApi {
     const headers = token ? { ...authHeader(token) } : {};
 
     try {
-      const response = await this.api.get(route, {}, headers);
+      const response = await this.api.get(this.baseUrl + route, {}, headers);
 
       if (response.ok) {
         const body = await response.json();
