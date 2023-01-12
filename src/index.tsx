@@ -1,11 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+
+import reportWebVitals from "./reportWebVitals";
+import { User } from "oidc-client-ts";
+import { AuthProvider } from "react-oidc-context";
+import { ContainerProvider } from "brandi-react";
+
+import { container } from "./di-container/container";
 import "./assets/css/main.css";
 import "./assets/css/vars.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { AuthProvider } from "react-oidc-context";
-import { User } from "oidc-client-ts";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -25,7 +29,9 @@ const oidcConfig = {
 root.render(
   <React.StrictMode>
     <AuthProvider {...oidcConfig}>
-      <App />
+      <ContainerProvider container={container}>
+        <App />
+      </ContainerProvider>
     </AuthProvider>
   </React.StrictMode>
 );

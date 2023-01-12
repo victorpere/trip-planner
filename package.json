@@ -11,6 +11,7 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "brandi": "^4.0.2",
+    "brandi-react": "^4.0.2",
     "oidc-client-ts": "^2.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
