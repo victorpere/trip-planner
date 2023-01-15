@@ -1,4 +1,6 @@
 .main-content {
   margin: auto;
   max-width: var(--base-width);
+  padding-left: var(--padding-main);
+  padding-right: var(--padding-main);
 }

@@ -3,6 +3,6 @@
   margin-right: auto;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-  max-width: 1024px;
+  max-width: var(--base-width);
   flex-grow: 1;
 }
