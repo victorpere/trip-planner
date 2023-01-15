@@ -1,7 +1,11 @@
-import { Container } from "brandi";
+import { Container, token } from "brandi";
 
-import { TOKENS } from "./tokens";
+import { Api } from "../modules/Api";
 import { ApiService } from "../modules/ApiService";
+
+export const TOKENS = {
+  api: token<Api>("api"),
+};
 
 export const container = new Container();
 

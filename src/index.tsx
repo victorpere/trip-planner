@@ -6,7 +6,7 @@ import { AuthProvider } from "react-oidc-context";
 import { ContainerProvider } from "brandi-react";
 
 import { oidcConfig } from "./config/oidc";
-import { container } from "./di-container/container";
+import { container } from "./config/container";
 import "./assets/css/main.css";
 import "./assets/css/vars.css";
 import App from "./App";
