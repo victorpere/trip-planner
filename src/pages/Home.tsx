@@ -1,8 +1,8 @@
 import React from "react";
-import TripList from "../components/Trips/TripList";
+import OwnTrips from "../components/Trips/OwnTrips";
 
 const Home = () => {
-  return <TripList />;
+  return <OwnTrips />;
 };
 
 export default Home;
