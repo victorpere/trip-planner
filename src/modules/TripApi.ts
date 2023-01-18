@@ -13,6 +13,11 @@ type TripDetailsResponse = {
   error?: string;
 };
 
+type CreateTripResponse = {
+  tripId?: string;
+  error?: string;
+};
+
 export class TripApi {
   private readonly baseUrl = process.env.REACT_APP_API_URL!;
   private api: Api;
@@ -21,6 +26,12 @@ export class TripApi {
     this.api = api;
   }
 
+  /**
+   * Returns trips of the specified owner
+   * @param ownerId
+   * @param token
+   * @returns array of trips of the specified owner and optional error
+   */
   async getOwnTrips(ownerId: string, token: string): Promise<TripsResponse> {
     const route = `/users/${ownerId}/owntrips`;
     const headers = { ...authHeader(token) };
@@ -41,6 +52,12 @@ export class TripApi {
     }
   }
 
+  /**
+   * Returns the specified trip
+   * @param tripId
+   * @param token
+   * @returns trip object and optional error
+   */
   async getTripDetails(
     tripId: string,
     token?: string
@@ -55,6 +72,40 @@ export class TripApi {
         const body = await response.json();
         if (body["data"]) {
           return { trip: body["data"], editable: body["editable"] };
+        }
+      }
+
+      return { error: response.statusText };
+    } catch (e: any) {
+      return { error: e.message };
+    }
+  }
+
+  /**
+   * Creates a new trip
+   * @param trip
+   * @param token
+   * @returns new trip id and optional error
+   */
+  async createNewTrip(trip: Trip, token: string): Promise<CreateTripResponse> {
+    const route = "/trips";
+    const headers = { ...authHeader(token) };
+    const body = { trip: trip };
+
+    try {
+      const response = await this.api.post(
+        this.baseUrl + route,
+        {},
+        headers,
+        body
+      );
+
+      if (response.ok) {
+        const body = await response.json();
+        if (body["tripId"]) {
+          return { tripId: body["tripId"] };
+        } else {
+          return { error: "something went wrong" };
         }
       }
 

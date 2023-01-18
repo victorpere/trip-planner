@@ -1,3 +1,5 @@
 import { Item } from "./Item";
 
-export interface Trip extends Item {}
+export interface Trip extends Item {
+  type?: "trip";
+}

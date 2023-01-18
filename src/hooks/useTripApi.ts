@@ -56,11 +56,48 @@ const useTripApi = () => {
     [auth.user, tripApi]
   );
 
+  const createTrip = useCallback(
+    async (trip: Trip, setTripId: (tripId?: string) => void) => {
+      setIsLoading(true);
+
+      if (auth.isAuthenticated) {
+        const response = await tripApi.createNewTrip(
+          trip,
+          auth.user!.access_token
+        );
+        setTripId(response.tripId);
+
+        if (response.error) {
+          setError(response.error);
+        }
+      }
+
+      setIsLoading(false);
+    },
+    [auth.isAuthenticated, auth.user, tripApi]
+  );
+
   return {
+    /**
+     * Indicates whether an operation is in process
+     */
     isLoading,
+    /**
+     * Error message, if an error has occurred
+     */
     error,
+    /**
+     * Returns trips of the specified owner
+     */
     getOwnTrips,
+    /**
+     * Returns the specified trip
+     */
     getTripDetails,
+    /**
+     * Creates a new trip
+     */
+    createTrip,
   };
 };
 
