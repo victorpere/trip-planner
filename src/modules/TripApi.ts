@@ -1,4 +1,4 @@
-import { Trip } from "../models/Trip";
+import Trip from "../models/Trip";
 import { Api } from "./Api";
 import { authHeader } from "./Utils";
 

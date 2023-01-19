@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 
 import useTripApi from "../../hooks/useTripApi";
-import { Trip } from "../../models/Trip";
+import Trip from "../../models/Trip";
 import Card from "../Cards/Card";
+import NewTrip from "./NewTrip";
 import TripList from "./TripList";
 
 const OwnTrips = () => {
@@ -30,7 +31,12 @@ const OwnTrips = () => {
     return <Card>{error}</Card>;
   }
 
-  return <TripList trips={trips} />;
+  return (
+    <Card>
+      <TripList trips={trips} />
+      <NewTrip />
+    </Card>
+  );
 };
 
 export default OwnTrips;

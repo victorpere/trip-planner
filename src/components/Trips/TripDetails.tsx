@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+
 import useTripApi from "../../hooks/useTripApi";
-import { Trip } from "../../models/Trip";
+import Trip from "../../models/Trip";
 
 type Props = {
   tripId?: string;

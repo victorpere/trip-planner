@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Trip } from "../../models/Trip";
+
+import Trip from "../../models/Trip";
 import Card from "../Cards/Card";
 import styles from "./Trips.module.css";
 

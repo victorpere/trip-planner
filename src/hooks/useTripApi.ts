@@ -4,7 +4,7 @@ import { useAuth } from "react-oidc-context";
 import { useInjection } from "brandi-react";
 
 import { TOKENS } from "../config/container";
-import { Trip } from "../models/Trip";
+import Trip from "../models/Trip";
 import { TripApi } from "../modules/TripApi";
 
 const useTripApi = () => {
