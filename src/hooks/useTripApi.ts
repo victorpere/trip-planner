@@ -5,7 +5,7 @@ import { useInjection } from "brandi-react";
 
 import { TOKENS } from "../config/container";
 import Trip from "../models/Trip";
-import { TripApi } from "../modules/TripApi";
+import TripApi from "../modules/TripApi";
 
 const useTripApi = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -77,6 +77,24 @@ const useTripApi = () => {
     [auth.isAuthenticated, auth.user, tripApi]
   );
 
+  const deleteTrip = useCallback(
+    async (tripId: string) => {
+      setIsLoading(true);
+      if (auth.isAuthenticated) {
+        const response = await tripApi.deleteTrip(
+          tripId,
+          auth.user!.access_token
+        );
+
+        if (response.error) {
+          setError(response.error);
+        }
+      }
+      setIsLoading(false);
+    },
+    [auth.isAuthenticated, auth.user, tripApi]
+  );
+
   return {
     /**
      * Indicates whether an operation is in process
@@ -98,6 +116,10 @@ const useTripApi = () => {
      * Creates a new trip
      */
     createTrip,
+    /**
+     * Deletes a trip
+     */
+    deleteTrip,
   };
 };
 

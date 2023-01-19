@@ -2,6 +2,10 @@ import Trip from "../models/Trip";
 import { Api } from "./Api";
 import { authHeader } from "./Utils";
 
+type EmptyResponse = {
+  error?: string;
+};
+
 type TripsResponse = {
   trips: Trip[];
   error?: string;
@@ -18,7 +22,7 @@ type CreateTripResponse = {
   error?: string;
 };
 
-export class TripApi {
+export default class TripApi {
   private readonly baseUrl = process.env.REACT_APP_API_URL!;
   private api: Api;
 
@@ -107,6 +111,22 @@ export class TripApi {
         } else {
           return { error: "something went wrong" };
         }
+      }
+
+      return { error: response.statusText };
+    } catch (e: any) {
+      return { error: e.message };
+    }
+  }
+
+  async deleteTrip(tripId: string, token: string): Promise<EmptyResponse> {
+    const route = `/trips/${tripId}`;
+    const headers = { ...authHeader(token) };
+
+    try {
+      const response = await this.api.delete(this.baseUrl + route, {}, headers);
+      if (response.ok) {
+        return {};
       }
 
       return { error: response.statusText };
