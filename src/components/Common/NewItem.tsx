@@ -9,7 +9,7 @@ type Props<T extends Item> = {
 
 const NewItem = <T extends Item>(props: Props<T>) => {
   const [isBeingAdded, setIsBeingAdded] = useState<boolean>(false);
-  const [itemName, setItemName] = useState<string>();
+  const [itemName, setItemName] = useState<string>("");
 
   const addButtonClickHandler = () => {
     setIsBeingAdded(true);

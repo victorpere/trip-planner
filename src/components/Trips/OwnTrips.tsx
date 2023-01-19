@@ -19,6 +19,10 @@ const OwnTrips = () => {
     }
   }, [isAuthenticated, getOwnTrips]);
 
+  const createTripHandler = (trip: Trip) => {
+    setTrips((prevTrips) => [...prevTrips, trip]);
+  };
+
   if (!isAuthenticated) {
     return <Card>Sign in to see your trips</Card>;
   }
@@ -34,7 +38,7 @@ const OwnTrips = () => {
   return (
     <Card>
       <TripList trips={trips} />
-      <NewTrip />
+      <NewTrip onCreateTrip={createTripHandler} />
     </Card>
   );
 };
