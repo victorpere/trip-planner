@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Trip from "../../models/Trip";
 import TripListItem from "./TripListItem";
@@ -13,6 +13,10 @@ const TripList = (props: Props) => {
   const tripDeletedHandler = (tripId: string) => {
     setTrips((prevTrips) => prevTrips.filter((trip) => trip.uuid !== tripId));
   };
+
+  useEffect(() => {
+    setTrips(props.trips);
+  }, [props.trips]);
 
   return (
     <>
