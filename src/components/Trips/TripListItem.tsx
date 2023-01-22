@@ -1,17 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
 import useTripApi from "../../hooks/useTripApi";
 import Trip from "../../models/Trip";
-import Card from "../Cards/Card";
+import ListItemCard from "../Cards/ListItemCard/ListItemCard";
 import styles from "./Trips.module.css";
 
 type Props = {
   trip: Trip;
   onTripDelete: (tripId: string) => void;
 };
-
-// TODO: formatting
 
 const TripListItem = (props: Props) => {
   const { deleteTrip } = useTripApi();
@@ -24,11 +19,15 @@ const TripListItem = (props: Props) => {
       });
     }
   };
+
   return (
-    <Card className={`${styles["trip-list-item"]}`}>
-      <Link to={`trip/${props.trip.uuid}`}>{props.trip.name}</Link>
-      <button onClick={deleteButtonHandler}>DELETE</button>
-    </Card>
+    <ListItemCard
+      title={props.trip.name}
+      imageUrl={props.trip.imageUrl}
+      linkUrl={`trip/${props.trip.uuid}`}
+      className={`${styles["trip-list-item"]}`}
+      onDelete={deleteButtonHandler}
+    />
   );
 };
 

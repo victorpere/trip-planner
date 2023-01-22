@@ -23,6 +23,10 @@ const OwnTrips = () => {
     setTrips((prevTrips) => [...prevTrips, trip]);
   };
 
+  const deleteTripHandler = (tripId: string) => {
+    setTrips((prevTrips) => prevTrips.filter((trip) => trip.uuid !== tripId));
+  };
+
   if (!isAuthenticated) {
     return <Card>Sign in to see your trips</Card>;
   }
@@ -37,7 +41,7 @@ const OwnTrips = () => {
 
   return (
     <Card>
-      <TripList trips={trips} />
+      <TripList trips={trips} onDeleteTrip={deleteTripHandler} />
       <NewTrip onCreateTrip={createTripHandler} />
     </Card>
   );

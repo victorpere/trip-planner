@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 
 import Trip from "../../models/Trip";
+import HorizontalItemList from "../Cards/Lists/HorizontalItemList";
 import TripListItem from "./TripListItem";
 
 type Props = {
   trips: Trip[];
+  onDeleteTrip?: (tripId: string) => void;
 };
 
 const TripList = (props: Props) => {
@@ -12,6 +14,7 @@ const TripList = (props: Props) => {
 
   const tripDeletedHandler = (tripId: string) => {
     setTrips((prevTrips) => prevTrips.filter((trip) => trip.uuid !== tripId));
+    props.onDeleteTrip && props.onDeleteTrip(tripId);
   };
 
   useEffect(() => {
@@ -19,7 +22,7 @@ const TripList = (props: Props) => {
   }, [props.trips]);
 
   return (
-    <>
+    <HorizontalItemList>
       {trips.map((trip) => {
         return (
           <TripListItem
@@ -29,7 +32,7 @@ const TripList = (props: Props) => {
           />
         );
       })}
-    </>
+    </HorizontalItemList>
   );
 };
 

@@ -1,5 +1,6 @@
 export interface Item {
-    uuid?: string,
-    name: string,
-    type?: string
+  uuid?: string;
+  name: string;
+  type?: string;
+  imageUrl?: string;
 }

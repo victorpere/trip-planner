@@ -24,6 +24,7 @@ const NewItem = <T extends Item>(props: Props<T>) => {
   const createItemButtonClickHandler = () => {
     if (itemName) {
       setIsBeingAdded(false);
+      setItemName("");
       const item = props.createItem(itemName);
       props.onCreateNewItem(item);
     } else {
