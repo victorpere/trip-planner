@@ -22,7 +22,9 @@ type CreateTripResponse = {
   error?: string;
 };
 
-export default class TripApi {
+// TODO: error messages
+
+export default class TripService {
   private readonly baseUrl = process.env.REACT_APP_API_URL!;
   private api: IApiService;
 
@@ -119,6 +121,44 @@ export default class TripApi {
     }
   }
 
+  /**
+   *
+   * @param trip
+   * @param token
+   * @returns
+   */
+  async updateTrip(trip: Trip, token: string): Promise<EmptyResponse> {
+    if (!trip.uuid) {
+      return { error: "trip missing uuid" };
+    }
+
+    const route = `/trips/${trip.uuid}`;
+    const headers = { ...authHeader(token) };
+    const body = { trip: trip };
+
+    try {
+      const response = await this.api.put(
+        this.baseUrl + route,
+        {},
+        headers,
+        body
+      );
+      if (response.ok) {
+        return {};
+      }
+
+      return { error: response.statusText };
+    } catch (e: any) {
+      return { error: e.message };
+    }
+  }
+
+  /**
+   * Deletes an existing trip
+   * @param tripId
+   * @param token
+   * @returns optional error
+   */
   async deleteTrip(tripId: string, token: string): Promise<EmptyResponse> {
     const route = `/trips/${tripId}`;
     const headers = { ...authHeader(token) };

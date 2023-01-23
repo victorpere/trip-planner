@@ -5,6 +5,7 @@ import Card from "../Cards/Card";
 type Props<T extends Item> = {
   createItem: (name: string) => T;
   onCreateNewItem: (item: T) => void;
+  onCancel?: () => void;
 };
 
 const NewItem = <T extends Item>(props: Props<T>) => {
@@ -32,11 +33,17 @@ const NewItem = <T extends Item>(props: Props<T>) => {
     }
   };
 
+  const cancelButtonClickHandler = () => {
+    setIsBeingAdded(false);
+    setItemName("");
+  };
+
   if (isBeingAdded) {
     return (
       <Card>
         <input type="text" value={itemName} onChange={itemNameChangeHandler} />
         <button onClick={createItemButtonClickHandler}>CREATE</button>
+        <button onClick={cancelButtonClickHandler}>CANCEL</button>
       </Card>
     );
   }

@@ -37,8 +37,24 @@ export class ApiService implements IApiService {
     return response;
   }
 
-  put(route: string, params: {}, headers: {}, body: {}): Promise<Response> {
-    throw new Error("Method not implemented.");
+  async put(
+    route: string,
+    params: {},
+    headers: {},
+    body: {}
+  ): Promise<Response> {
+    console.log("api.put");
+    console.log(route);
+    console.log(params);
+    console.log(headers);
+    console.log(body);
+    const response = await fetch(route + queryString(params), {
+      method: "PUT",
+      headers: headers,
+      body: JSON.stringify(body),
+    });
+    console.log(response);
+    return response;
   }
 
   async delete(route: string, params: {}, headers: {}): Promise<Response> {

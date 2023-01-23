@@ -5,14 +5,14 @@ import { useInjection } from "brandi-react";
 
 import { TOKENS } from "../config/tokens";
 import Trip from "../models/Trip";
-import TripApi from "../modules/TripApi";
+import TripService from "../modules/trip-service";
 
 const useTripApi = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const auth = useAuth();
   const apiService = useInjection(TOKENS.apiService);
-  const tripApi = useMemo(() => new TripApi(apiService), [apiService]);
+  const tripApi = useMemo(() => new TripService(apiService), [apiService]);
 
   const getOwnTrips = useCallback(
     async (setTrips: (trips: Trip[]) => void) => {
@@ -77,6 +77,24 @@ const useTripApi = () => {
     [auth.isAuthenticated, auth.user, tripApi]
   );
 
+  const updateTrip = useCallback(
+    async (trip: Trip) => {
+      setIsLoading(true);
+      if (auth.isAuthenticated) {
+        const response = await tripApi.updateTrip(
+          trip,
+          auth.user!.access_token
+        );
+
+        if (response.error) {
+          setError(response.error);
+        }
+      }
+      setIsLoading(false);
+    },
+    [auth.isAuthenticated, auth.user, tripApi]
+  );
+
   const deleteTrip = useCallback(
     async (tripId: string) => {
       setIsLoading(true);
@@ -116,6 +134,10 @@ const useTripApi = () => {
      * Creates a new trip
      */
     createTrip,
+    /**
+     * Updates a trip
+     */
+    updateTrip,
     /**
      * Deletes a trip
      */

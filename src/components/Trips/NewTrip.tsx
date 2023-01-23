@@ -12,7 +12,7 @@ type Props = {
 };
 
 const NewTrip = (props: Props) => {
-  const { createTrip } = useTripApi();
+  const { createTrip, updateTrip } = useTripApi();
   const { getImages } = useImageService();
 
   const createNewTripHandler = (trip: Trip) => {
@@ -23,7 +23,9 @@ const NewTrip = (props: Props) => {
     const processImages = (imageInfos: ImageInfo[]) => {
       if (imageInfos.length > 0) {
         trip.imageUrl = imageInfos[0].url;
-        props.onUpdateTrip(trip);
+        updateTrip(trip).then(() => {
+          props.onUpdateTrip(trip);
+        });
       }
     };
 
