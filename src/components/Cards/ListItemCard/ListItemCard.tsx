@@ -16,7 +16,7 @@ const ListItemCard = (props: Props) => {
   return (
     <Card className={`${styles["list-item-card"]} ${props.className ?? ""}`}>
       <div className={`${styles["list-item-card-image"]}`}>
-        {props.imageUrl && <img src={props.imageUrl} alt={props.title} />}
+        {props.imageUrl && <img src={props.imageUrl} alt={props.title} className={styles["list-item-card-img"]} />}
       </div>
       <div>
         <Link to={props.linkUrl}>{props.title}</Link>

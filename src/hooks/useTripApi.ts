@@ -3,7 +3,7 @@ import { useCallback, useState, useMemo } from "react";
 import { useAuth } from "react-oidc-context";
 import { useInjection } from "brandi-react";
 
-import { TOKENS } from "../config/container";
+import { TOKENS } from "../config/tokens";
 import Trip from "../models/Trip";
 import TripApi from "../modules/TripApi";
 

@@ -27,6 +27,15 @@ const OwnTrips = () => {
     setTrips((prevTrips) => prevTrips.filter((trip) => trip.uuid !== tripId));
   };
 
+  const updateTripHandler = (trip: Trip) => {
+    setTrips((prevTrips) => {
+      const tripIndex = prevTrips.map((trip) => trip.uuid).indexOf(trip.uuid);
+      const updatedTrips = [...prevTrips];
+      updatedTrips[tripIndex] = { ...trip };
+      return updatedTrips;
+    });
+  };
+
   if (!isAuthenticated) {
     return <Card>Sign in to see your trips</Card>;
   }
@@ -42,7 +51,10 @@ const OwnTrips = () => {
   return (
     <Card>
       <TripList trips={trips} onDeleteTrip={deleteTripHandler} />
-      <NewTrip onCreateTrip={createTripHandler} />
+      <NewTrip
+        onCreateTrip={createTripHandler}
+        onUpdateTrip={updateTripHandler}
+      />
     </Card>
   );
 };

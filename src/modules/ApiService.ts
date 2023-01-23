@@ -1,4 +1,5 @@
 import { Api } from "./Api";
+import { queryString } from "./utilities";
 
 // TODO: querystring params
 
@@ -8,7 +9,7 @@ export class ApiService implements Api {
     console.log(route);
     console.log(params);
     console.log(headers);
-    const response = await fetch(route, {
+    const response = await fetch(route + queryString(params), {
       method: "GET",
       headers: headers,
     });
@@ -27,7 +28,7 @@ export class ApiService implements Api {
     console.log(params);
     console.log(headers);
     console.log(body);
-    const response = await fetch(route, {
+    const response = await fetch(route + queryString(params), {
       method: "POST",
       headers: headers,
       body: JSON.stringify(body),
@@ -45,7 +46,7 @@ export class ApiService implements Api {
     console.log(route);
     console.log(params);
     console.log(headers);
-    const response = await fetch(route, {
+    const response = await fetch(route + queryString(params), {
       method: "DELETE",
       headers: headers,
     });

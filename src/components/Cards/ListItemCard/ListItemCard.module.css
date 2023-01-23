@@ -6,9 +6,16 @@
   height: 10rem;
   flex-shrink: 0;
   flex-grow: 0;
+  overflow: hidden;
 }
 
 .list-item-card-image {
-    width: 15rem;
-    height: 7rem;
+  width: 15rem;
+  height: 7rem;
+  overflow: hidden;
+}
+
+img.list-item-card-img {
+  width: 100%;
+  height: auto;
 }

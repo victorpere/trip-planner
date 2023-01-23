@@ -1,12 +1,10 @@
-import { Container, token } from "brandi";
+import { Container } from "brandi";
 
-import { Api } from "../modules/Api";
+import { TOKENS } from "./tokens";
 import { ApiService } from "../modules/ApiService";
-
-export const TOKENS = {
-  api: token<Api>("api"),
-};
+import { WikipediaService } from "../modules/wikipedia-service";
 
 export const container = new Container();
 
 container.bind(TOKENS.api).toInstance(ApiService).inTransientScope();
+container.bind(TOKENS.imageService).toInstance(WikipediaService).inTransientScope();
