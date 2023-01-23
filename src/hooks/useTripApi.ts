@@ -11,7 +11,7 @@ const useTripApi = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const auth = useAuth();
-  const apiService = useInjection(TOKENS.api);
+  const apiService = useInjection(TOKENS.apiService);
   const tripApi = useMemo(() => new TripApi(apiService), [apiService]);
 
   const getOwnTrips = useCallback(

@@ -1,9 +1,9 @@
-import { Api } from "./Api";
+import { IApiService } from "./api-service.interface";
 import { queryString } from "./utilities";
 
 // TODO: querystring params
 
-export class ApiService implements Api {
+export class ApiService implements IApiService {
   async get(route: string, params: {}, headers: {}): Promise<Response> {
     console.log("api.get");
     console.log(route);

@@ -1,14 +1,14 @@
 import { injected } from "brandi";
 
 import { TOKENS } from "../config/tokens";
-import { Api } from "./Api";
+import { IApiService } from "./api-service.interface";
 import { IImageService, ImageInfo } from "./image-service.interface";
 
 export class WikipediaService implements IImageService {
   private baseUrl = "https://en.wikipedia.org/w/api.php";
-  private apiService: Api;
+  private apiService: IApiService;
 
-  constructor(apiService: Api) {
+  constructor(apiService: IApiService) {
     this.apiService = apiService;
   }
 
@@ -46,4 +46,4 @@ export class WikipediaService implements IImageService {
   }
 }
 
-injected(WikipediaService, TOKENS.api);
+injected(WikipediaService, TOKENS.apiService);

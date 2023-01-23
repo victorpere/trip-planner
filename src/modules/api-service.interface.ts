@@ -1,4 +1,4 @@
-export interface Api {
+export interface IApiService {
   get(route: string, params: {}, headers: {}): Promise<Response>;
 
   post(route: string, params: {}, headers: {}, body: {}): Promise<Response>;

@@ -1,5 +1,5 @@
 import Trip from "../models/Trip";
-import { Api } from "./Api";
+import { IApiService } from "./api-service.interface";
 import { authHeader } from "./utilities";
 
 type EmptyResponse = {
@@ -24,9 +24,9 @@ type CreateTripResponse = {
 
 export default class TripApi {
   private readonly baseUrl = process.env.REACT_APP_API_URL!;
-  private api: Api;
+  private api: IApiService;
 
-  constructor(api: Api) {
+  constructor(api: IApiService) {
     this.api = api;
   }
 
