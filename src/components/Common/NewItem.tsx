@@ -6,6 +6,7 @@ type Props<T extends Item> = {
   createItem: (name: string) => T;
   onCreateNewItem: (item: T) => void;
   onCancel?: () => void;
+  label?: string;
 };
 
 const NewItem = <T extends Item>(props: Props<T>) => {
@@ -41,6 +42,7 @@ const NewItem = <T extends Item>(props: Props<T>) => {
   if (isBeingAdded) {
     return (
       <Card>
+        <span>{props.label ?? ""}</span>
         <input type="text" value={itemName} onChange={itemNameChangeHandler} />
         <button onClick={createItemButtonClickHandler}>CREATE</button>
         <button onClick={cancelButtonClickHandler}>CANCEL</button>

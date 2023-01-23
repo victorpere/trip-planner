@@ -23,6 +23,7 @@ type CreateTripResponse = {
 };
 
 // TODO: error messages
+// FIXME: repetitive code
 
 export default class TripService {
   private readonly baseUrl = process.env.REACT_APP_API_URL!;

@@ -11,6 +11,8 @@ type Props = {
   onUpdateTrip: (trip: Trip) => void;
 };
 
+// TODO: localized strings
+
 const NewTrip = (props: Props) => {
   const { createTrip, updateTrip } = useTripApi();
   const { getImages } = useImageService();
@@ -39,6 +41,7 @@ const NewTrip = (props: Props) => {
     <NewItem<Trip>
       createItem={tripCreator}
       onCreateNewItem={createNewTripHandler}
+      label="Where do you want to go?"
     />
   );
 };
