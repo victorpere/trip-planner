@@ -1,6 +1,6 @@
 import useTripApi from "../../hooks/useTripApi";
 import Trip from "../../models/Trip";
-import ListItemCard from "../Cards/ListItemCard/ListItemCard";
+import PhotoCardSmall from "../Cards/PhotoCardSmall/PhotoCardSmall";
 import styles from "./Trips.module.css";
 
 type Props = {
@@ -21,7 +21,7 @@ const TripListItem = (props: Props) => {
   };
 
   return (
-    <ListItemCard
+    <PhotoCardSmall
       title={props.trip.name}
       imageUrl={props.trip.imageUrl}
       linkUrl={`trip/${props.trip.uuid}`}

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import Card from "../Card";
 
-import styles from "./ListItemCard.module.css";
+import styles from "./PhotoCardSmall.module.css";
 
 type Props = {
   title: string;
@@ -12,10 +12,10 @@ type Props = {
   onDelete?: () => void;
 };
 
-const ListItemCard = (props: Props) => {
+const PhotoCardSmall = (props: Props) => {
   return (
     <Card className={`${styles["list-item-card"]} ${props.className ?? ""}`}>
-      <div className={`${styles["list-item-card-image"]}`}>
+      <div className={`${styles["list-item-card-img-container"]}`}>
         {props.imageUrl && (
           <img
             src={props.imageUrl}
@@ -32,4 +32,4 @@ const ListItemCard = (props: Props) => {
   );
 };
 
-export default ListItemCard;
+export default PhotoCardSmall;
