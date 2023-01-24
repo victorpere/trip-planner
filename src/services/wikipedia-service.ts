@@ -1,8 +1,8 @@
 import { injected } from "brandi";
 
 import { TOKENS } from "../config/tokens";
-import { IApiService } from "./api-service.interface";
-import { IImageService, ImageInfo } from "./image-service.interface";
+import { IApiService } from "./interfaces/api-service.interface";
+import { IImageService, ImageInfo } from "./interfaces/image-service.interface";
 
 export class WikipediaService implements IImageService {
   private baseUrl = "https://en.wikipedia.org/w/api.php";

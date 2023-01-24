@@ -1,7 +1,7 @@
 import { useInjection } from "brandi-react";
 import { useCallback } from "react";
 import { TOKENS } from "../config/tokens";
-import { ImageInfo } from "../modules/image-service.interface";
+import { ImageInfo } from "../services/interfaces/image-service.interface";
 
 export const useImageService = () => {
   const imageService = useInjection(TOKENS.imageService);

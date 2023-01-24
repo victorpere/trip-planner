@@ -1,31 +1,20 @@
+import { injected } from "brandi";
+import { TOKENS } from "../config/tokens";
 import Trip from "../models/Trip";
-import { IApiService } from "./api-service.interface";
+import { IApiService } from "./interfaces/api-service.interface";
+import {
+  ITripService,
+  TripsResponse,
+  TripDetailsResponse,
+  CreateTripResponse,
+  EmptyResponse,
+} from "./interfaces/trip-service.interface";
 import { authHeader } from "./utilities";
-
-type EmptyResponse = {
-  error?: string;
-};
-
-type TripsResponse = {
-  trips: Trip[];
-  error?: string;
-};
-
-type TripDetailsResponse = {
-  trip?: Trip;
-  editable?: boolean;
-  error?: string;
-};
-
-type CreateTripResponse = {
-  tripId?: string;
-  error?: string;
-};
 
 // TODO: error messages
 // FIXME: repetitive code
 
-export default class TripService {
+export default class TripService implements ITripService {
   private readonly baseUrl = process.env.REACT_APP_API_URL!;
   private api: IApiService;
 
@@ -176,3 +165,5 @@ export default class TripService {
     }
   }
 }
+
+injected(TripService, TOKENS.apiService);

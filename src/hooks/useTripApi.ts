@@ -1,18 +1,16 @@
-import { useCallback, useState, useMemo } from "react";
+import { useCallback, useState } from "react";
 
 import { useAuth } from "react-oidc-context";
 import { useInjection } from "brandi-react";
 
 import { TOKENS } from "../config/tokens";
 import Trip from "../models/Trip";
-import TripService from "../modules/trip-service";
 
 const useTripApi = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const auth = useAuth();
-  const apiService = useInjection(TOKENS.apiService);
-  const tripApi = useMemo(() => new TripService(apiService), [apiService]);
+  const tripApi = useInjection(TOKENS.tripService);
 
   const getOwnTrips = useCallback(
     async (setTrips: (trips: Trip[]) => void) => {

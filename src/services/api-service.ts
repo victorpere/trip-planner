@@ -1,4 +1,4 @@
-import { IApiService } from "./api-service.interface";
+import { IApiService } from "./interfaces/api-service.interface";
 import { queryString } from "./utilities";
 
 // TODO: querystring params

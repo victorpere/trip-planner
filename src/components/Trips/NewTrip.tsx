@@ -3,7 +3,7 @@ import { useImageService } from "../../hooks/useImageService";
 
 import useTripApi from "../../hooks/useTripApi";
 import Trip, { tripCreator } from "../../models/Trip";
-import { ImageInfo } from "../../modules/image-service.interface";
+import { ImageInfo } from "../../services/interfaces/image-service.interface";
 import NewItem from "../Common/NewItem";
 
 type Props = {
