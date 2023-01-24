@@ -24,6 +24,6 @@ export interface ITripService {
   getOwnTrips(ownerId: string, token: string): Promise<TripsResponse>;
   getTripDetails(tripId: string, token?: string): Promise<TripDetailsResponse>;
   createNewTrip(trip: Trip, token: string): Promise<CreateTripResponse>;
-  updateTrip(trip: Trip, token: string): Promise<EmptyResponse>
-  deleteTrip(tripId: string, token: string): Promise<EmptyResponse>
+  updateTrip(trip: Trip, token: string): Promise<EmptyResponse>;
+  deleteTrip(tripId: string, token: string): Promise<EmptyResponse>;
 }
