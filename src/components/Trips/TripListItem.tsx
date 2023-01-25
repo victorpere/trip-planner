@@ -1,4 +1,4 @@
-import useTripApi from "../../hooks/useTripApi";
+import useTripService from "../../hooks/useTripService";
 import Trip from "../../models/Trip";
 import PhotoCardSmall from "../Cards/PhotoCardSmall/PhotoCardSmall";
 import styles from "./Trips.module.css";
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const TripListItem = (props: Props) => {
-  const { deleteTrip } = useTripApi();
+  const { deleteTrip } = useTripService();
   const deleteButtonHandler = () => {
     // TODO: pop up warning about deleting
 

@@ -1,7 +1,7 @@
 import React from "react";
-import { useImageService } from "../../hooks/useImageService";
 
-import useTripApi from "../../hooks/useTripApi";
+import useTripService from "../../hooks/useTripService";
+import useImageService from "../../hooks/useImageService";
 import Trip, { tripCreator } from "../../models/Trip";
 import { ImageInfo } from "../../services/interfaces/image-service.interface";
 import NewItem from "../Common/NewItem";
@@ -14,7 +14,7 @@ type Props = {
 // TODO: localized strings
 
 const NewTrip = (props: Props) => {
-  const { createTrip, updateTrip } = useTripApi();
+  const { createTrip, updateTrip } = useTripService();
   const { getImages } = useImageService();
 
   const createNewTripHandler = (trip: Trip) => {

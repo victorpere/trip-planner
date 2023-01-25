@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import useTripApi from "../../hooks/useTripApi";
+import useTripService from "../../hooks/useTripService";
 import Trip from "../../models/Trip";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 const TripDetails = (props: Props) => {
-  const { getTripDetails, isLoading, error } = useTripApi();
+  const { getTripDetails, isLoading, error } = useTripService();
   const [trip, setTrip] = useState<Trip | null>();
 
   useEffect(() => {

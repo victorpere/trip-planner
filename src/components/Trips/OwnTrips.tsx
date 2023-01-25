@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useAuth } from "react-oidc-context";
 
-import useTripApi from "../../hooks/useTripApi";
+import useTripService from "../../hooks/useTripService";
 import Trip from "../../models/Trip";
 import Card from "../Cards/Card";
 import NewTrip from "./NewTrip";
@@ -11,7 +11,7 @@ import TripList from "./TripList";
 const OwnTrips = () => {
   const { isAuthenticated } = useAuth();
   const [trips, setTrips] = useState<Trip[]>([]);
-  const { isLoading, error, getOwnTrips } = useTripApi();
+  const { isLoading, error, getOwnTrips } = useTripService();
 
   useEffect(() => {
     if (isAuthenticated) {

@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { TOKENS } from "../config/tokens";
 import { ImageInfo } from "../services/interfaces/image-service.interface";
 
-export const useImageService = () => {
+const useImageService = () => {
   const imageService = useInjection(TOKENS.imageService);
 
   const getImages = useCallback(
@@ -19,3 +19,5 @@ export const useImageService = () => {
 
   return { getImages };
 };
+
+export default useImageService;

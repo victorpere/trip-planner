@@ -6,9 +6,9 @@ import { useInjection } from "brandi-react";
 import { TOKENS } from "../config/tokens";
 import Trip from "../models/Trip";
 
-const useTripApi = () => {
+const useTripService = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | undefined>(undefined);
   const auth = useAuth();
   const tripApi = useInjection(TOKENS.tripService);
 
@@ -143,4 +143,4 @@ const useTripApi = () => {
   };
 };
 
-export default useTripApi;
+export default useTripService;
