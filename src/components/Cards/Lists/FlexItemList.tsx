@@ -1,11 +1,10 @@
-import React, { ReactNode } from "react";
+import React from "react";
 
 import styles from "./FlexItemList.module.css";
 
 type Props = {
-  children: ReactNode;
+  children: JSX.Element[];
   className?: string;
-  parentItemType?: string;
 };
 
 const FlexItemList = (props: Props) => {

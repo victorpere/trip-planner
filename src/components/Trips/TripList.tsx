@@ -22,7 +22,7 @@ const TripList = (props: Props) => {
   }, [props.trips]);
 
   return (
-    <FlexItemList parentItemType="trip">
+    <FlexItemList>
       {trips.map((trip) => {
         return (
           <TripListItem
