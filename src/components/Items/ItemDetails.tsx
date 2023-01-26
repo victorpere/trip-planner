@@ -16,7 +16,7 @@ const ItemDetails = (props: Props) => {
   return (
     <div>
       {item.type}: {item.name}
-      <ItemList item={item} tripId={item.uuid} />
+      <ItemList parentItem={item} tripId={item.uuid} />
     </div>
   );
 };

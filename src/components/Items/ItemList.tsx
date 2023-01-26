@@ -1,28 +1,34 @@
 import React from "react";
+import GroupAlternatives from "../../models/GroupAlternatives";
+import GroupSequence from "../../models/GroupSequence";
 import { Item } from "../../models/Item";
-import Trip from "../../models/Trip";
 import FlexItemList from "../Cards/Lists/FlexItemList";
 import ItemDetails from "./ItemDetails";
 
 type Props = {
-  item?: Item;
+  parentItem?: Item;
   tripId?: string;
 };
 
 const ItemList = (props: Props) => {
-  switch (props.item?.type) {
-    case "trip":
-      const item = props.item as Trip;
-      <FlexItemList parentItemType="trip">
-        {item?.items?.map((item) => (
-          <ItemDetails key={item.uuid} item={item} />
-        ))}
-      </FlexItemList>;
+  let itemList: JSX.Element[];
+
+  switch (props.parentItem?.type) {
+    case "group-seq":
+      itemList = (props.parentItem as GroupSequence)?.items?.map((group) => (
+        <ItemDetails key={group.uuid} item={group} />
+      ));
+      break;
+    case "group-alt":
+      itemList = (props.parentItem as GroupAlternatives)?.items?.map(
+        (group) => <ItemDetails key={group.uuid} item={group} />
+      );
       break;
     default:
+      itemList = [];
   }
 
-  return <></>;
+  return <FlexItemList>{itemList}</FlexItemList>;
 };
 
 export default ItemList;
