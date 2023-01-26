@@ -1,13 +1,14 @@
 import React, { ReactNode } from "react";
 
-import styles from "./HorizontalItemList.module.css";
+import styles from "./FlexItemList.module.css";
 
 type Props = {
   children: ReactNode;
   className?: string;
+  parentItemType?: string;
 };
 
-const HorizontalItemList = (props: Props) => {
+const FlexItemList = (props: Props) => {
   return (
     <div className={`${styles["list"]} ${props.className ?? ""}`}>
       {props.children}
@@ -15,4 +16,4 @@ const HorizontalItemList = (props: Props) => {
   );
 };
 
-export default HorizontalItemList;
+export default FlexItemList;

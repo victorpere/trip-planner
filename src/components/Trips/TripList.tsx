@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Trip from "../../models/Trip";
-import HorizontalItemList from "../Cards/Lists/HorizontalItemList";
+import FlexItemList from "../Cards/Lists/FlexItemList";
 import TripListItem from "./TripListItem";
 
 type Props = {
@@ -22,7 +22,7 @@ const TripList = (props: Props) => {
   }, [props.trips]);
 
   return (
-    <HorizontalItemList>
+    <FlexItemList parentItemType="trip">
       {trips.map((trip) => {
         return (
           <TripListItem
@@ -32,7 +32,7 @@ const TripList = (props: Props) => {
           />
         );
       })}
-    </HorizontalItemList>
+    </FlexItemList>
   );
 };
 
