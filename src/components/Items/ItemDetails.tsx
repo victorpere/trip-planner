@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Item } from "../../models/Item";
-import ItemList from "./ItemList";
+import { itemDetailsComponent } from "./utilities";
+import { ItemDetailProps } from "./props.type";
 
-type Props = {
-  item: Item;
-};
+const ItemDetails = (props: ItemDetailProps) => {
+  const [item] = useState<Item>(props.item);
+  const ItemDetalsComponent = itemDetailsComponent(item.type);
 
-const ItemDetails = (props: Props) => {
-  const [item, setItem] = useState<Item>(props.item);
-
-  useEffect(() => {
-    setItem(props.item);
-  }, [props.item]);
-
-  return (
-    <div>
-      {item.type}: {item.name}
-      <ItemList parentItem={item} tripId={item.uuid} />
-    </div>
-  );
+  return <ItemDetalsComponent item={item} />;
 };
 
 export default ItemDetails;

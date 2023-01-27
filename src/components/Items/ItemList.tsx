@@ -1,16 +1,11 @@
 import React from "react";
 import GroupAlternatives from "../../models/GroupAlternatives";
 import GroupSequence from "../../models/GroupSequence";
-import { Item } from "../../models/Item";
 import FlexItemList from "../Cards/Lists/FlexItemList";
 import ItemDetails from "./ItemDetails";
+import { ItemListProps } from "./props.type";
 
-type Props = {
-  parentItem?: Item;
-  tripId?: string;
-};
-
-const ItemList = (props: Props) => {
+const ItemList = (props: ItemListProps) => {
   let itemList: JSX.Element[];
 
   switch (props.parentItem?.type) {
