@@ -2,20 +2,29 @@
   border-radius: var(--border-raidus-01);
   padding: 0;
   margin: 0;
-  width: 15rem;
-  height: 10rem;
-  flex-shrink: 0;
-  flex-grow: 0;
+  height: 12rem;
+  flex: 1 1 auto;
   overflow: hidden;
 }
 
 .list-item-card-img-container {
-  width: 15rem;
-  height: 8rem;
+  width: 100%;
+  height: 10rem;
   overflow: hidden;
 }
 
 img.list-item-card-img {
   width: 100%;
   height: auto;
+}
+
+@media only screen and (min-width: 420px) {
+  .list-item-card {
+    height: 10rem;
+    max-width: 15rem;
+  }
+
+  .list-item-card-img-container {
+    height: 8rem;
+  }
 }
