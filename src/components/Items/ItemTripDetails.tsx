@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { useTripItemService } from "../../hooks/useTripItemService";
 import { Item } from "../../models/Item";
 import Trip from "../../models/Trip";
@@ -7,12 +8,10 @@ import Card from "../Cards/Card";
 import NewItem from "../Common/NewItem";
 import ItemList from "./ItemList";
 import { activityCreator } from "../../models/Activity";
+import { ItemType } from "../../config/enums";
+import { ItemDetailProps } from "./props.type";
 
-type Props = {
-  item: Item;
-};
-
-const ItemTripDetails = (props: Props) => {
+const ItemTripDetails = (props: ItemDetailProps) => {
   const [trip, setTrip] = useState<Trip>(props.item as Trip);
   const { createItem } = useTripItemService();
 
@@ -39,8 +38,6 @@ const ItemTripDetails = (props: Props) => {
     }
   };
 
-  console.log("trip", trip);
-
   return (
     <Card>
       <div>TripDetails</div>
@@ -50,7 +47,7 @@ const ItemTripDetails = (props: Props) => {
         onCreateNewItem={createItemHandler}
         label="activity name"
       />
-      <ItemList parentItem={trip} tripId={trip.uuid} />
+      <ItemList parentItemType={ItemType.trip} items={trip.items} />
     </Card>
   );
 };

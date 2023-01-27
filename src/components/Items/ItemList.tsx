@@ -2,18 +2,20 @@ import React from "react";
 
 import FlexItemList from "../Cards/Lists/FlexItemList";
 import ItemDetails from "./ItemDetails";
-import { ItemListProps } from "./props.type";
+import { Item } from "../../models/Item";
 
-const ItemList = (props: ItemListProps) => {
-  const itemList = props.parentItem?.items?.map((item) => (
-    <ItemDetails key={item.uuid} item={item} />
-  ));
+type Props = {
+  items?: Item[];
+  parentItemType?: string;
+  editable?: boolean;
+};
 
-  if (itemList) {
-    return <FlexItemList>{itemList}</FlexItemList>;
-  }
+const ItemList = (props: Props) => {
+  const itemList: JSX.Element[] = props.items
+    ? props.items?.map((item) => <ItemDetails key={item.uuid} item={item} />)
+    : [];
 
-  return <></>;
+  return <FlexItemList>{itemList}</FlexItemList>;
 };
 
 export default ItemList;
