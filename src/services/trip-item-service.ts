@@ -8,6 +8,7 @@ import { CreateItemResponse, BaseResponse } from "./types/response.type";
 import { authHeader } from "./utilities";
 
 export default class TripItemService implements ITripItemService {
+  private readonly baseUrl = process.env.REACT_APP_API_URL!;
   private apiService: IApiService;
 
   constructor(apiService: IApiService) {
@@ -27,7 +28,12 @@ export default class TripItemService implements ITripItemService {
     const body = { item: item };
 
     try {
-      const response = await this.apiService.post(route, {}, headers, body);
+      const response = await this.apiService.post(
+        this.baseUrl + route,
+        {},
+        headers,
+        body
+      );
 
       if (response.ok) {
         const body = await response.json();
