@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Item } from "../../models/Item";
 import Card from "../Cards/Card";
+import Dialog from "../elements/Dialog";
 
 type Props<T extends Item> = {
   createItem: (name: string) => T;
@@ -41,12 +42,18 @@ const NewItem = <T extends Item>(props: Props<T>) => {
 
   if (isBeingAdded) {
     return (
-      <Card>
-        <span>{props.label ?? ""}</span>
-        <input type="text" value={itemName} onChange={itemNameChangeHandler} />
-        <button onClick={createItemButtonClickHandler}>CREATE</button>
-        <button onClick={cancelButtonClickHandler}>CANCEL</button>
-      </Card>
+      <Dialog>
+        <Card>
+          <span>{props.label ?? ""}</span>
+          <input
+            type="text"
+            value={itemName}
+            onChange={itemNameChangeHandler}
+          />
+          <button onClick={createItemButtonClickHandler}>CREATE</button>
+          <button onClick={cancelButtonClickHandler}>CANCEL</button>
+        </Card>
+      </Dialog>
     );
   }
 
