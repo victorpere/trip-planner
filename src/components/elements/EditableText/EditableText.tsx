@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
+import styles from "./EditableText.module.css";
+
 type Props = {
-    key: string;
+  key: string;
   editable: boolean;
   editing: boolean;
   text?: string;
@@ -33,6 +35,7 @@ const EditableText = (props: Props) => {
   if (editing) {
     return (
       <input
+        className={styles["editable"]}
         type="text"
         placeholder={props.placeholder}
         value={text}
@@ -43,7 +46,11 @@ const EditableText = (props: Props) => {
     );
   }
 
-  return <span onClick={startEditing}>{text ?? props.placeholder}</span>;
+  return (
+    <span className={styles["editable"]} onClick={startEditing}>
+      {text ?? props.placeholder}
+    </span>
+  );
 };
 
 export default EditableText;
