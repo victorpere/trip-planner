@@ -10,6 +10,9 @@ type Props = {
   placeholder?: string;
   minLength?: number;
   maxLength?: number;
+  className?: string;
+  inputClassName?: string;
+  spanClassName?: string;
   onChange?: (key: string, text?: string) => void;
 };
 
@@ -35,7 +38,9 @@ const EditableText = (props: Props) => {
   if (editing) {
     return (
       <input
-        className={styles["editable"]}
+        className={`${styles["editable"]} ${props.className ?? ""} ${
+          props.inputClassName ?? ""
+        }`.trimEnd()}
         type="text"
         placeholder={props.placeholder}
         value={text}
@@ -47,7 +52,12 @@ const EditableText = (props: Props) => {
   }
 
   return (
-    <span className={styles["editable"]} onClick={startEditing}>
+    <span
+      className={`${styles["editable"]} ${props.className ?? ""} ${
+        props.spanClassName ?? ""
+      }`.trimEnd()}
+      onClick={startEditing}
+    >
       {text ?? props.placeholder}
     </span>
   );
