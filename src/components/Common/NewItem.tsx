@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Item } from "../../models/Item";
 import Card from "../Cards/Card";
-import Dialog from "../elements/Dialog";
+import Dialog from "../elements/Dialog/Dialog";
 
 type Props<T extends Item> = {
   createItem: (name: string) => T;
