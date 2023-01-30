@@ -10,6 +10,10 @@
 
   --header-text-color: #fff;
   --header-background-color: #ffa500;
+
+  --editable-text-border: none;
+  --editable-text-offset: 0;
+  --editable-text-top-offset: 0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,5 +23,9 @@
 
     --header-text-color: #ddd;
     --header-background-color: #b27e1d;
+
+    --editable-text-border: 1px solid #fff;
+    --editable-text-left-offset: -1px;
+    --editable-text-top-offset: -1px;
   }
 }
