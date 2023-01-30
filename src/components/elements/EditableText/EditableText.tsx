@@ -1,25 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 
+import useClickOutside from "./useOutsideClick";
 import styles from "./EditableText.module.css";
-
-function useOutsideAlerter<T extends HTMLElement>(
-  ref: React.RefObject<T>,
-  action: () => void
-) {
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        action();
-      }
-    }
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [ref, action]);
-}
 
 type Props = {
   key: string;
@@ -43,12 +25,11 @@ const EditableText = (props: Props) => {
   );
   const [text, setText] = useState<string>(props.text ?? "");
 
-  useOutsideAlerter(mainSpanRef, () => {
+  useClickOutside(mainSpanRef, () => {
     setEditing(false);
   });
 
   const startEditing = () => {
-    console.log("startEditing");
     if (props.editable) {
       setEditing(true);
     }
