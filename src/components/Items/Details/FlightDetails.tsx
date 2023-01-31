@@ -1,5 +1,8 @@
 import React from "react";
+
 import EditableText from "../../elements/EditableText/EditableText";
+
+import styles from "./EditableText.module.css";
 
 type Props = {};
 
@@ -11,9 +14,10 @@ const FlightDetails = (props: Props) => {
         <EditableText
           key="airportDeparture"
           editable={true}
-          editing={false}
           placeholder="Airport"
           maxLength={3}
+          staticClassName={styles.editable}
+          inputClassName={styles.editable}
         />
       </div>
     </div>

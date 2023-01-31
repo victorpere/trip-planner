@@ -1,19 +1,18 @@
 import React, { useState, useRef } from "react";
 
 import useClickOutside from "./useOutsideClick";
-import styles from "./EditableText.module.css";
 
 type Props = {
   key: string;
   editable: boolean;
-  editing: boolean;
+  editing?: boolean;
   text?: string;
   placeholder?: string;
   minLength?: number;
   maxLength?: number;
   className?: string;
   inputClassName?: string;
-  spanClassName?: string;
+  staticClassName?: string;
   onChange?: (key: string, text?: string) => void;
 };
 
@@ -21,7 +20,7 @@ const EditableText = (props: Props) => {
   const mainSpanRef = useRef<HTMLSpanElement>(null);
 
   const [editing, setEditing] = useState<boolean>(
-    props.editable && props.editing
+    props.editable && (props.editing ?? false)
   );
   const [text, setText] = useState<string>(props.text ?? "");
 
@@ -43,12 +42,10 @@ const EditableText = (props: Props) => {
   };
 
   return (
-    <span ref={mainSpanRef}>
+    <span ref={mainSpanRef} className={props.className}>
       <input
         hidden={!editing}
-        className={`${styles["editable"]} ${props.className ?? ""} ${
-          props.inputClassName ?? ""
-        }`.trimEnd()}
+        className={props.inputClassName}
         type="text"
         placeholder={props.placeholder}
         value={text}
@@ -58,9 +55,7 @@ const EditableText = (props: Props) => {
       />
       <span
         hidden={editing}
-        className={`${styles["editable"]} ${props.className ?? ""} ${
-          props.spanClassName ?? ""
-        }`.trimEnd()}
+        className={props.staticClassName}
         onClick={startEditing}
       >
         {text.length > 0 ? text : props.placeholder}
