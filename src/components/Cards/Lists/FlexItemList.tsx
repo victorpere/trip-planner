@@ -10,7 +10,11 @@ type Props = {
 const FlexItemList = (props: Props) => {
   return (
     <div className={`${styles["list"]} ${props.className ?? ""}`}>
-      {props.children}
+      {props.children.map((child, index) => (
+        <div key={index} className={styles["list-item"]}>
+          {child}
+        </div>
+      ))}
     </div>
   );
 };

@@ -14,7 +14,8 @@ input.editable {
   font-weight: inherit;
   font-family: inherit;
   background-color: var(--background-color);
-  color: var(--text-color)
+  color: var(--text-color);
+  width: 4em;
 }
 
 input.editable:hover {
@@ -31,6 +32,7 @@ span.editable {
   padding-left: 0.25em;
   padding-right: 0.25em;
   transition: box-shadow 0.25s;
+  width: 4em;
 }
 
 span.editable:hover {
