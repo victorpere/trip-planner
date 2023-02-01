@@ -1,8 +1,8 @@
 import React from "react";
 
-import FlexItemList from "../Cards/Lists/FlexItemList";
 import ItemDetails from "./ItemDetails";
 import { Item } from "../../models/Item";
+import { itemListComponent } from "./utilities";
 
 type Props = {
   items?: Item[];
@@ -15,7 +15,9 @@ const ItemList = (props: Props) => {
     ? props.items?.map((item) => <ItemDetails key={item.uuid} item={item} />)
     : [];
 
-  return <FlexItemList>{itemList}</FlexItemList>;
+  let ListComponent = itemListComponent(props.parentItemType);
+
+  return <ListComponent>{itemList}</ListComponent>;
 };
 
 export default ItemList;

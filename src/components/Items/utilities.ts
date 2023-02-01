@@ -1,4 +1,6 @@
 import { ItemType } from "../../config/enums";
+import FlexItemList from "../Cards/Lists/FlexItemList";
+import VerticalList from "../Cards/Lists/VerticalList";
 import ItemActivityDetails from "./ItemActivityDetails";
 import ItemGenericDetails from "./ItemGenericDetails";
 import ItemGroupAltDetails from "./ItemGroupAltDetails";
@@ -17,5 +19,14 @@ export const itemDetailsComponent = (itemType: string) => {
       return ItemActivityDetails;
     default:
       return ItemGenericDetails;
+  }
+};
+
+export const itemListComponent = (parentItemType?: string) => {
+  switch (parentItemType) {
+    case ItemType.trip:
+      return VerticalList;
+    default:
+      return FlexItemList;
   }
 };
