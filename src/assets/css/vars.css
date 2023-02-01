@@ -16,6 +16,12 @@
   --editable-text-top-offset: 0;
 }
 
+@media only screen and (min-width: 420px) {
+  :root {
+    --padding-main: 1rem;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text-color: #eee;
