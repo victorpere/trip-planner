@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import useTripService from "../../hooks/useTripService";
 import Trip from "../../models/Trip";
+import ItemDetails from "../Items/ItemDetails";
 
 type Props = {
   tripId?: string;
@@ -30,10 +31,14 @@ const TripDetails = (props: Props) => {
   }
 
   if (trip) {
-    return <div>{trip.name}</div>;
+    return (
+      <div>
+        <ItemDetails item={{ ...trip, type: "trip" }} />
+      </div>
+    );
   }
 
-  return <div>{props.tripId}</div>;
+  return <div>no such trip: {props.tripId}</div>;
 };
 
 export default TripDetails;

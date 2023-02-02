@@ -1,14 +1,14 @@
 import { injected } from "brandi";
 import { TOKENS } from "../config/tokens";
 import Trip from "../models/Trip";
+import { ITripService } from "./interfaces/trip-service.interface";
 import { IApiService } from "./interfaces/api-service.interface";
 import {
-  ITripService,
+  BaseResponse,
   TripsResponse,
   TripDetailsResponse,
   CreateTripResponse,
-  EmptyResponse,
-} from "./interfaces/trip-service.interface";
+} from "./types/response.type";
 import { authHeader } from "./utilities";
 
 // TODO: error messages
@@ -117,7 +117,7 @@ export default class TripService implements ITripService {
    * @param token
    * @returns
    */
-  async updateTrip(trip: Trip, token: string): Promise<EmptyResponse> {
+  async updateTrip(trip: Trip, token: string): Promise<BaseResponse> {
     if (!trip.uuid) {
       return { error: "trip missing uuid" };
     }
@@ -149,7 +149,7 @@ export default class TripService implements ITripService {
    * @param token
    * @returns optional error
    */
-  async deleteTrip(tripId: string, token: string): Promise<EmptyResponse> {
+  async deleteTrip(tripId: string, token: string): Promise<BaseResponse> {
     const route = `/trips/${tripId}`;
     const headers = { ...authHeader(token) };
 

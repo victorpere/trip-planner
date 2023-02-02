@@ -10,6 +10,7 @@
   .header-content {
     margin: auto;
     max-width: var(--base-width);
+    padding: var(--padding-main);
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: auto;
