@@ -1,12 +1,14 @@
 import React from "react";
 
-import Card from "../Cards/Card";
-import FlightDetails from "./Details/FlightDetails";
-import { ItemDetailProps } from "./props.type";
+import Card from "../../Cards/Card";
+import FlightDetails from "../Details/FlightDetails";
+import { ItemDetailProps } from "../props.type";
+
+import styles from "./ItemDetails.module.css";
 
 const ItemActivityDetails = (props: ItemDetailProps) => {
   return (
-    <Card>
+    <Card className={styles["item-activity"]}>
       <div>activity {props.item.name}</div>
       <div>
         <FlightDetails />

@@ -5,6 +5,7 @@ import styles from "./Dialog.module.css";
 
 type Props = {
   children: ReactElement;
+  backgroundColor?: string;
 };
 
 const Dialog = (props: Props) => {
@@ -12,7 +13,7 @@ const Dialog = (props: Props) => {
     <>
       {ReactDOM.createPortal(
         <div className={styles["dialog-screen"]}>
-          <div className={`${styles["center"]} ${styles["dialog"]}`}>
+          <div className={`${styles["center"]} ${styles["dialog"]}`}  style={{backgroundColor: props.backgroundColor}}>
             {props.children}
           </div>
         </div>,

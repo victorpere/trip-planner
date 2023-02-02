@@ -1,10 +1,10 @@
 import { ItemType } from "../../config/enums";
 import FlexItemList from "../Cards/Lists/FlexItemList";
 import VerticalList from "../Cards/Lists/VerticalList";
-import ItemActivityDetails from "./ItemActivityDetails";
-import ItemGenericDetails from "./ItemGenericDetails";
-import ItemGroupAltDetails from "./ItemGroupAltDetails";
-import ItemGroupSeqDetails from "./ItemGroupSeqDetails";
+import ItemActivityDetails from "./ItemActivity/ItemActivityDetails";
+import ItemGenericDetails from "./ItemGeneric/ItemGenericDetails";
+import ItemGroupAltDetails from "./ItemGroupAlt/ItemGroupAltDetails";
+import ItemGroupSeqDetails from "./ItemGroupSeq/ItemGroupSeqDetails";
 import ItemTripDetails from "./ItemTripDetails";
 
 export const itemDetailsComponent = (itemType: string) => {

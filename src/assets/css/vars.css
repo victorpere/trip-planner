@@ -22,7 +22,7 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --text-color: #eee;
     --background-color: #121212;
@@ -34,4 +34,4 @@
     --editable-text-left-offset: -1px;
     --editable-text-top-offset: -1px;
   }
-}
+} */

@@ -42,7 +42,7 @@ const NewItem = <T extends Item>(props: Props<T>) => {
 
   if (isBeingAdded) {
     return (
-      <Dialog>
+      <Dialog backgroundColor="wheat">
         <Card>
           <span>{props.label ?? ""}</span>
           <input

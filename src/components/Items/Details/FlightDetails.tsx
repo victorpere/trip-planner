@@ -9,8 +9,8 @@ type Props = {};
 const FlightDetails = (props: Props) => {
   return (
     <div>
-      <div>FlightDetails</div>
-      <div>
+      <span>
+        From:
         <EditableText
           key="airportDeparture"
           editable={true}
@@ -19,7 +19,18 @@ const FlightDetails = (props: Props) => {
           staticClassName={styles.editable}
           inputClassName={styles.editable}
         />
-      </div>
+      </span>
+      <span>
+        to:
+        <EditableText
+          key="airportArrival"
+          editable={true}
+          placeholder="Airport"
+          maxLength={3}
+          staticClassName={styles.editable}
+          inputClassName={styles.editable}
+        />
+      </span>
     </div>
   );
 };
