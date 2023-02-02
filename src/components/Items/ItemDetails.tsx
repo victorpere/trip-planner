@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { Item } from "../../models/Item";
+import React from "react";
+
 import { itemDetailsComponent } from "./utilities";
 import { ItemDetailProps } from "./props.type";
 
 const ItemDetails = (props: ItemDetailProps) => {
-  const [item] = useState<Item>(props.item);
-  const ItemDetalsComponent = itemDetailsComponent(item.type);
+  const ItemDetalsComponent = itemDetailsComponent(props.item.type);
 
-  return <ItemDetalsComponent item={item} />;
+  return <ItemDetalsComponent item={props.item} />;
 };
 
 export default ItemDetails;

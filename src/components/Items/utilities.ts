@@ -5,7 +5,7 @@ import ItemActivityDetails from "./ItemActivity/ItemActivityDetails";
 import ItemGenericDetails from "./ItemGeneric/ItemGenericDetails";
 import ItemGroupAltDetails from "./ItemGroupAlt/ItemGroupAltDetails";
 import ItemGroupSeqDetails from "./ItemGroupSeq/ItemGroupSeqDetails";
-import ItemTripDetails from "./ItemTripDetails";
+import ItemTripDetails from "./ItemTrip/ItemTripDetails";
 
 export const itemDetailsComponent = (itemType: string) => {
   switch (itemType) {

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-import { useTripItemService } from "../../hooks/useTripItemService";
-import { Item } from "../../models/Item";
-import Trip from "../../models/Trip";
-import { Activity } from "../../models/Activity";
-import Card from "../Cards/Card";
-import NewItem from "../Common/NewItem";
-import ItemList from "./ItemList";
-import { activityCreator } from "../../models/Activity";
-import { ItemType } from "../../config/enums";
-import { ItemDetailProps } from "./props.type";
+import { useTripItemService } from "../../../hooks/useTripItemService";
+import { Item } from "../../../models/Item";
+import Trip from "../../../models/Trip";
+import { Activity } from "../../../models/Activity";
+import Card from "../../Cards/Card";
+import NewItem from "../../Common/NewItem";
+import ItemList from "../ItemList";
+import { activityCreator } from "../../../models/Activity";
+import { ItemType } from "../../../config/enums";
+import { ItemDetailProps } from "../props.type";
 
 const ItemTripDetails = (props: ItemDetailProps) => {
   const [trip, setTrip] = useState<Trip>(props.item as Trip);
