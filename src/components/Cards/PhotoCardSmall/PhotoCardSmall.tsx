@@ -1,3 +1,4 @@
+import { FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 import Card from "../Card";
@@ -12,6 +13,7 @@ type Props = {
   onDelete?: () => void;
 };
 
+// TODO: content as prop
 const PhotoCardSmall = (props: Props) => {
   return (
     <Card className={`${styles["list-item-card"]} ${props.className ?? ""}`}>
@@ -24,9 +26,13 @@ const PhotoCardSmall = (props: Props) => {
           />
         )}
       </div>
-      <div>
-        <Link to={props.linkUrl}>{props.title}</Link>
-        {props.onDelete && <button onClick={props.onDelete}>Delete</button>}
+      <div className="clearfix">
+        <div className="float-left">
+          <Link to={props.linkUrl}>{props.title}</Link>
+        </div>
+        <div className="button float-right">
+          {props.onDelete && <FaTrashAlt onClick={props.onDelete} />}
+        </div>
       </div>
     </Card>
   );

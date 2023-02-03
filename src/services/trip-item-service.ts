@@ -50,14 +50,32 @@ export default class TripItemService implements ITripItemService {
     }
   }
 
-  deleteItem(
+  async deleteItem(
     tripId: string,
     itemType: string,
     itemId: string,
     token: string
   ): Promise<BaseResponse> {
-    throw new Error("Method not implemented.");
+    const route = `/trips/${tripId}/${itemType}/${itemId}`;
+    const headers = { ...authHeader(token) };
+
+    try {
+      const response = await this.apiService.delete(
+        this.baseUrl + route,
+        {},
+        headers
+      );
+
+      if (response.ok) {
+        return {};
+      }
+
+      return { error: response.statusText };
+    } catch (e: any) {
+      return { error: e.message };
+    }
   }
+  
   updateItem(
     tripId: string,
     itemType: string,

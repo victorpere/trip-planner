@@ -1,7 +1,6 @@
 import { IApiService } from "./interfaces/api-service.interface";
 import { queryString } from "./utilities";
 
-// TODO: querystring params
 
 export class ApiService implements IApiService {
   async get(route: string, params: {}, headers: {}): Promise<Response> {
@@ -58,7 +57,7 @@ export class ApiService implements IApiService {
   }
 
   async delete(route: string, params: {}, headers: {}): Promise<Response> {
-    console.log("api.post");
+    console.log("api.delete");
     console.log(route);
     console.log(params);
     console.log(headers);

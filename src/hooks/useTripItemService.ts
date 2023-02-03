@@ -40,8 +40,27 @@ export const useTripItemService = () => {
     [tripItemService, auth.isAuthenticated, auth.user]
   );
 
+  const deleteItem = useCallback(
+    async (tripId: string, itemType: string, itemId: string) => {
+      if (auth.isAuthenticated && auth.user) {
+        const response = await tripItemService.deleteItem(
+          tripId,
+          itemType,
+          itemId,
+          auth.user.access_token
+        );
+
+        if (response.error) {
+          setError(response.error);
+        }
+      }
+    },
+    [tripItemService, auth.isAuthenticated, auth.user]
+  );
+
   return {
     error,
     createItem,
+    deleteItem,
   };
 };

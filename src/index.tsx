@@ -9,6 +9,8 @@ import { oidcConfig } from "./config/oidc";
 import { container } from "./config/container";
 import "./assets/css/main.css";
 import "./assets/css/vars.css";
+import "./assets/css/elements.css";
+import "./assets/css/formatting.css";
 import App from "./App";
 
 const root = ReactDOM.createRoot(

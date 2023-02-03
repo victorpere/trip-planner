@@ -1,0 +1,8 @@
+.button {
+  cursor: pointer;
+  transition: text-shadow 0.25s;
+}
+
+.button:hover {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
