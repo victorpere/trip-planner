@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
+
 import useTripService from "../../hooks/useTripService";
 import Trip from "../../models/Trip";
 import PhotoCardSmall from "../Cards/PhotoCardSmall/PhotoCardSmall";
@@ -24,9 +27,9 @@ const TripListItem = (props: Props) => {
     <PhotoCardSmall
       title={props.trip.name}
       imageUrl={props.trip.imageUrl}
-      linkUrl={`trip/${props.trip.uuid}`}
       className={`${styles["trip-list-item"]}`}
-      onDelete={deleteButtonHandler}
+      leftContent={<Link to={`trip/${props.trip.uuid}`}>{props.trip.name}</Link>}
+      rightContent={<FaTrashAlt onClick={deleteButtonHandler} />}
     />
   );
 };
