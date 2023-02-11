@@ -1,5 +1,8 @@
 {
   "title": "Trip Hoarder",
   "Sign in": "Sign in",
-  "Sign out": "Sign out"
+  "Sign out": "Sign out",
+  "Are you sure you want to delete this trip?": "Are you sure you want to delete this trip?",
+  "Yes": "Yes",
+  "No": "No"
 }
