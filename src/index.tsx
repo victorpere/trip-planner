@@ -7,13 +7,12 @@ import { ContainerProvider } from "brandi-react";
 
 import { oidcConfig } from "./config/oidc";
 import { container } from "./config/container";
+import "./config/i18n";
 import "./assets/css/main.css";
 import "./assets/css/vars.css";
 import "./assets/css/elements.css";
 import "./assets/css/formatting.css";
 import App from "./App";
-
-import "./i18n";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
