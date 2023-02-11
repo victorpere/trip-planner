@@ -1,13 +1,17 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import styles from "./Header.module.css";
+
 import HeaderUser from "./HeaderUser";
+import styles from "./Header.module.css";
 
 type Props = {
   showUser: boolean;
 };
 
 const Header = (props: Props) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles["header"]}>
       <div className={styles["header-content"]}>
@@ -15,7 +19,7 @@ const Header = (props: Props) => {
           className={`${styles["header-item"]} ${styles["header-item-left"]}`}
         >
           <h1>
-            <Link to="/">TITLE</Link>
+            <Link to="/">{t("title")}</Link>
           </h1>
         </div>
         <div
