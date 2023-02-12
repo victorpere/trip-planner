@@ -16,7 +16,7 @@
   --editable-text-top-offset: 0;
 }
 
-@media only screen and (min-width: 420px) {
+@media only screen and (min-width: 500px) {
   :root {
     --padding-main: 1rem;
   }

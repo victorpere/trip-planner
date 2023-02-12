@@ -12,8 +12,6 @@ type Props = {
   rightContent?: ReactNode;
 };
 
-// TODO: default width
-
 const PhotoCardSmall = (props: Props) => {
   return (
     <Card className={`${styles["list-item-card"]} ${props.className ?? ""}`}>
