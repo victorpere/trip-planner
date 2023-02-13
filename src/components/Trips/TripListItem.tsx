@@ -31,36 +31,37 @@ const TripListItem = (props: Props) => {
     setDeleting(true);
   };
 
-  if (deleting) {
-    return (
-      <Dialog>
-        <>
-          <div>{t("Are you sure you want to delete this trip?")}</div>
-          <div>
-            <button onClick={deleteConfirmButtonHandler}>{t("Yes")}</button>
-            <button
-              onClick={() => {
-                setDeleting(false);
-              }}
-            >
-              {t("No")}
-            </button>
-          </div>
-        </>
-      </Dialog>
-    );
-  }
+  const deleteDialog = (
+    <Dialog>
+      <>
+        <div>{t("Are you sure you want to delete this trip?")}</div>
+        <div>
+          <button onClick={deleteConfirmButtonHandler}>{t("Yes")}</button>
+          <button
+            onClick={() => {
+              setDeleting(false);
+            }}
+          >
+            {t("No")}
+          </button>
+        </div>
+      </>
+    </Dialog>
+  );
 
   return (
-    <PhotoCardSmall
-      title={props.trip.name}
-      imageUrl={props.trip.imageUrl}
-      className={`${styles["trip-list-item"]}`}
-      leftContent={
-        <Link to={`trip/${props.trip.uuid}`}>{props.trip.name}</Link>
-      }
-      rightContent={<FaTrashAlt onClick={deleteButtonHandler} />}
-    />
+    <>
+      {deleting && deleteDialog}
+      <PhotoCardSmall
+        title={props.trip.name}
+        imageUrl={props.trip.imageUrl}
+        className={`${styles["trip-list-item"]}`}
+        leftContent={
+          <Link to={`trip/${props.trip.uuid}`}>{props.trip.name}</Link>
+        }
+        rightContent={<FaTrashAlt onClick={deleteButtonHandler} />}
+      />
+    </>
   );
 };
 
