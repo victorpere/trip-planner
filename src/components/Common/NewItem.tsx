@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Item } from "../../models/Item";
 import Card from "../Cards/Card";
-import Dialog from "../elements/Dialog/Dialog";
+import Overlay from "../elements/Overlay/Overlay";
 
 type Props<T extends Item> = {
   createItem: (name: string) => T;
@@ -42,7 +42,7 @@ const NewItem = <T extends Item>(props: Props<T>) => {
 
   if (isBeingAdded) {
     return (
-      <Dialog backgroundColor="wheat">
+      <Overlay backgroundColor="wheat">
         <Card>
           <span>{props.label ?? ""}</span>
           <input
@@ -53,7 +53,7 @@ const NewItem = <T extends Item>(props: Props<T>) => {
           <button onClick={createItemButtonClickHandler}>CREATE</button>
           <button onClick={cancelButtonClickHandler}>CANCEL</button>
         </Card>
-      </Dialog>
+      </Overlay>
     );
   }
 

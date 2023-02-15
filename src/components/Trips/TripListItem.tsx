@@ -1,13 +1,12 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 
 import useTripService from "../../hooks/useTripService";
 import Trip from "../../models/Trip";
 import PhotoCardSmall from "../Cards/PhotoCardSmall/PhotoCardSmall";
+import ActionDialog from "../Common/ActionDialog";
 import styles from "./Trips.module.css";
-import { useState } from "react";
-import Dialog from "../elements/Dialog/Dialog";
-import { useTranslation } from "react-i18next";
 
 type Props = {
   trip: Trip;
@@ -17,7 +16,6 @@ type Props = {
 const TripListItem = (props: Props) => {
   const { deleteTrip } = useTripService();
   const [deleting, setDeleting] = useState(false);
-  const { t } = useTranslation();
 
   const deleteConfirmButtonHandler = () => {
     if (props.trip.uuid) {
@@ -32,21 +30,13 @@ const TripListItem = (props: Props) => {
   };
 
   const deleteDialog = (
-    <Dialog>
-      <>
-        <div>{t("Are you sure you want to delete this trip?")}</div>
-        <div>
-          <button onClick={deleteConfirmButtonHandler}>{t("Yes")}</button>
-          <button
-            onClick={() => {
-              setDeleting(false);
-            }}
-          >
-            {t("No")}
-          </button>
-        </div>
-      </>
-    </Dialog>
+    <ActionDialog
+      text={"Are you sure you want to delete this trip?"}
+      buttons={[
+        { label: "Yes", action: deleteConfirmButtonHandler },
+        { label: "No", action: () => setDeleting(false) },
+      ]}
+    />
   );
 
   return (

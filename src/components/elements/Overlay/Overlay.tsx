@@ -1,14 +1,14 @@
 import React, { ReactElement } from "react";
 import ReactDOM from "react-dom";
 
-import styles from "./Dialog.module.css";
+import styles from "./Overlay.module.css";
 
 type Props = {
   children: ReactElement;
   backgroundColor?: string;
 };
 
-const Dialog = (props: Props) => {
+const Overlay = (props: Props) => {
   return (
     <>
       {ReactDOM.createPortal(
@@ -17,10 +17,10 @@ const Dialog = (props: Props) => {
             {props.children}
           </div>
         </div>,
-        document.getElementById("dialog-root") as HTMLElement
+        document.getElementById("overlay-root") as HTMLElement
       )}
     </>
   );
 };
 
-export default Dialog;
+export default Overlay;
