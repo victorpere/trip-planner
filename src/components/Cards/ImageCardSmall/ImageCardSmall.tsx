@@ -1,27 +1,35 @@
 import { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 import Card from "../Card";
 
-import styles from "./PhotoCardSmall.module.css";
+import styles from "./ImageCardSmall.module.css";
 
 type Props = {
   title: string;
+  linkUrl?: string;
   imageUrl?: string;
   className?: string;
   leftContent?: ReactNode;
   rightContent?: ReactNode;
 };
 
-const PhotoCardSmall = (props: Props) => {
+const ImageCardSmall = (props: Props) => {
+  const imgElement = props.imageUrl && (
+    <img
+      src={props.imageUrl}
+      alt={props.title}
+      className={styles["list-item-card-img"]}
+    />
+  );
+
   return (
     <Card className={`${styles["list-item-card"]} ${props.className ?? ""}`}>
       <div className={`${styles["list-item-card-img-container"]}`}>
-        {props.imageUrl && (
-          <img
-            src={props.imageUrl}
-            alt={props.title}
-            className={styles["list-item-card-img"]}
-          />
+        {props.linkUrl ? (
+          <Link to={props.linkUrl}>{imgElement}</Link>
+        ) : (
+          imgElement
         )}
       </div>
       <div className={`${styles["content"]} clearfix`}>
@@ -32,4 +40,4 @@ const PhotoCardSmall = (props: Props) => {
   );
 };
 
-export default PhotoCardSmall;
+export default ImageCardSmall;

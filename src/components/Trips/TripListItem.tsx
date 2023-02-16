@@ -4,7 +4,7 @@ import { FaTrashAlt } from "react-icons/fa";
 
 import useTripService from "../../hooks/useTripService";
 import Trip from "../../models/Trip";
-import PhotoCardSmall from "../Cards/PhotoCardSmall/PhotoCardSmall";
+import ImageCardSmall from "../Cards/ImageCardSmall/ImageCardSmall";
 import ActionDialog from "../Common/ActionDialog";
 import styles from "./Trips.module.css";
 
@@ -42,8 +42,9 @@ const TripListItem = (props: Props) => {
   return (
     <>
       {deleting && deleteDialog}
-      <PhotoCardSmall
+      <ImageCardSmall
         title={props.trip.name}
+        linkUrl={`trip/${props.trip.uuid}`}
         imageUrl={props.trip.imageUrl}
         className={`${styles["trip-list-item"]}`}
         leftContent={
