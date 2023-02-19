@@ -26,5 +26,6 @@
     opacity: 1;
     font-weight: normal;
     font-size: 1rem;
+    box-shadow: var(--shadow-highlighted);
   }
   

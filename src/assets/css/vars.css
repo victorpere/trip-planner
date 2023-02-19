@@ -17,8 +17,8 @@
 
   --trip-background-color: lightskyblue;
 
-  --shadow-color: 0 1px 4px rgba(0, 0, 0, 0.25);
-  --shadow-color-hover: 0 1px 4px rgb(60, 132, 215);
+  --shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  --shadow-highlighted: 0 1px 4px rgb(60, 132, 215);
 }
 
 @media only screen and (min-width: 500px) {
@@ -41,7 +41,7 @@
 
     --trip-background-color: #3e7a96;
 
-    --shadow-color: 0 0 0 1px rgba(60, 60, 60, 0.222);
-    --shadow-color-hover: 0 0 0 1px rgb(181, 208, 242);
+    --shadow: 0 0 0 1px rgba(60, 60, 60, 0.222);
+    --shadow-highlighted: 0 0 0 1px rgb(181, 208, 242);
   }
 }
