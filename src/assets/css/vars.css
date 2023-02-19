@@ -14,6 +14,11 @@
   --editable-text-border: none;
   --editable-text-offset: 0;
   --editable-text-top-offset: 0;
+
+  --trip-background-color: lightskyblue;
+
+  --shadow-color: 0 1px 4px rgba(0, 0, 0, 0.25);
+  --shadow-color-hover: 0 1px 4px rgba(23, 112, 220, 1);
 }
 
 @media only screen and (min-width: 500px) {
@@ -22,7 +27,7 @@
   }
 }
 
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   :root {
     --text-color: #eee;
     --background-color: #121212;
@@ -33,5 +38,10 @@
     --editable-text-border: 1px solid #fff;
     --editable-text-left-offset: -1px;
     --editable-text-top-offset: -1px;
+
+    --trip-background-color: #3e7a96;
+
+    --shadow-color: 0 0 1px 1px rgba(60, 60, 60, 1);
+    --shadow-color-hover: 0 0 4px 1px rgb(181, 208, 242);
   }
-} */
+}
