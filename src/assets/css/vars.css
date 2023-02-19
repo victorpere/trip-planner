@@ -18,7 +18,7 @@
   --trip-background-color: lightskyblue;
 
   --shadow-color: 0 1px 4px rgba(0, 0, 0, 0.25);
-  --shadow-color-hover: 0 1px 4px rgba(23, 112, 220, 1);
+  --shadow-color-hover: 0 1px 4px rgb(60, 132, 215);
 }
 
 @media only screen and (min-width: 500px) {
@@ -33,7 +33,7 @@
     --background-color: #121212;
 
     --header-text-color: #ddd;
-    --header-background-color: #b27e1d;
+    --header-background-color: #aa7928;
 
     --editable-text-border: 1px solid #fff;
     --editable-text-left-offset: -1px;
@@ -41,7 +41,7 @@
 
     --trip-background-color: #3e7a96;
 
-    --shadow-color: 0 0 1px 1px rgba(60, 60, 60, 1);
-    --shadow-color-hover: 0 0 4px 1px rgb(181, 208, 242);
+    --shadow-color: 0 0 0 1px rgba(60, 60, 60, 0.222);
+    --shadow-color-hover: 0 0 0 1px rgb(181, 208, 242);
   }
 }
