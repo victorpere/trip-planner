@@ -14,8 +14,8 @@ const ActionDialog = (props: Props) => {
       <>
         <div>{t(props.text)}</div>
         <div>
-          {props.buttons.map((button) => (
-            <button onClick={button.action}>{t(button.label)}</button>
+          {props.buttons.map((button, index) => (
+            <button key={index} onClick={button.action}>{t(button.label)}</button>
           ))}
         </div>
       </>
