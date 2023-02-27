@@ -20,7 +20,7 @@ const OwnTrips = () => {
   }, [isAuthenticated, getOwnTrips]);
 
   const createTripHandler = (trip: Trip) => {
-    setTrips((prevTrips) => [...prevTrips, trip]);
+    setTrips((prevTrips) => [trip, ...prevTrips]);
   };
 
   const deleteTripHandler = (tripId: string) => {

@@ -1,0 +1,76 @@
+.scroller-container {
+  position: relative;
+}
+
+.scroller-crop {
+  overflow: hidden;
+}
+
+.scroller-content {
+  overflow-x: scroll;
+  overscroll-behavior-x: contain;
+  position: relative;
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+}
+
+.scroller-platter {
+  display: inline-flex;
+  width: 100%;
+  vertical-align: top;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  white-space: nowrap;
+}
+
+.scroller-item {
+  display: inline-block;
+  scroll-snap-align: start;
+}
+
+.scroller-item-view {
+  display: flex;
+  margin-right: 0.5em;
+  margin-left: 1px;
+  margin-top: 1px;
+}
+
+.scroller-item-content {
+  display: block;
+}
+
+.scroller-nav {
+  position: absolute;
+  opacity: 0;
+  width: 2em;
+  top: 0;
+  transition: opacity 0.5s;
+}
+
+.scroller-nav-left {
+  left: 0;
+}
+
+.scroller-nav-right {
+  right: 0;
+}
+
+.scroller-container:hover .scroller-nav {
+  opacity: 1;
+}
+
+.scroller-button {
+  border: none;
+  background-color: transparent;
+  font-size: 2.4em;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: opacity 0.5s;
+  cursor: pointer;
+}
+
+.scroller-button:hover {
+  color: blue;
+}
