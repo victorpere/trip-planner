@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import Trip from "../../models/Trip";
-import FlexItemList from "../Cards/Lists/FlexItemList";
 import HorizontalList from "../Cards/Lists/HorizontalList";
 import TripListItem from "./TripListItem";
 
