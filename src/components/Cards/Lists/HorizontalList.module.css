@@ -69,8 +69,9 @@
   transform: translateY(-50%);
   transition: opacity 0.5s;
   cursor: pointer;
+  color: var(--text-color)
 }
 
 .scroller-button:hover {
-  color: blue;
+  color: var(--highlight-color);
 }
