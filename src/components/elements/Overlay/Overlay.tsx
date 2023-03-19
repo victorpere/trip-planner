@@ -5,7 +5,7 @@ import styles from "./Overlay.module.css";
 
 type Props = {
   children: ReactElement;
-  backgroundColor?: string;
+  className?: string;
 };
 
 const Overlay = (props: Props) => {
@@ -13,7 +13,7 @@ const Overlay = (props: Props) => {
     <>
       {ReactDOM.createPortal(
         <div className={styles["dialog-screen"]}>
-          <div className={`${styles["center"]} ${styles["dialog"]}`}  style={{backgroundColor: props.backgroundColor}}>
+          <div className={`${styles["center"]} ${styles["dialog"]} ${props.className ?? ""}`}>
             {props.children}
           </div>
         </div>,

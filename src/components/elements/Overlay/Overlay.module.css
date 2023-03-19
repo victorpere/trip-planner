@@ -22,7 +22,6 @@
   .dialog {
     padding: 1rem;
     border-radius: 0.5rem;
-    background-color: var(--background-color);
     opacity: 1;
     font-weight: normal;
     font-size: 1rem;
