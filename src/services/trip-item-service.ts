@@ -75,24 +75,63 @@ export default class TripItemService implements ITripItemService {
       return { error: e.message };
     }
   }
-  
-  updateItem(
+
+  async updateItem(
     tripId: string,
     itemType: string,
     itemId: string,
     item: Item,
     token: string
   ): Promise<BaseResponse> {
-    throw new Error("Method not implemented.");
+    const route = `/trips/${tripId}/${itemType}/${itemId}`;
+    const headers = { ...authHeader(token) };
+    const body = { "item": item };
+
+    try {
+      const response = await this.apiService.put(
+        this.baseUrl + route,
+        {},
+        headers,
+        body
+      );
+
+      if (response.ok) {
+        return {};
+      }
+
+      return { error: response.statusText };
+    } catch (e: any) {
+      return { error: e.message };
+    }
   }
-  patchItem(
+
+  async patchItem(
     tripId: string,
     itemType: string,
     itemId: string,
     item: Item,
     token: string
   ): Promise<BaseResponse> {
-    throw new Error("Method not implemented.");
+    const route = `/trips/${tripId}/${itemType}/${itemId}`;
+    const headers = { ...authHeader(token) };
+    const body = { "item": item };
+
+    try {
+      const response = await this.apiService.patch(
+        this.baseUrl + route,
+        {},
+        headers,
+        body
+      );
+
+      if (response.ok) {
+        return {};
+      }
+
+      return { error: response.statusText };
+    } catch (e: any) {
+      return { error: e.message };
+    }
   }
 }
 
