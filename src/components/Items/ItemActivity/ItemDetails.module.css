@@ -1,5 +1,5 @@
 .item-activity {
-  background-color: aqua;
+  background-color: var(--item-activity-background-color);
   padding: 0.5rem;
   /* padding-bottom: 0; */
   margin: 0;
