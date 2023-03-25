@@ -47,7 +47,12 @@ const ItemTripDetails = (props: ItemDetailProps) => {
         onCreateNewItem={createItemHandler}
         label="activity name"
       />
-      <ItemList tripId={trip.uuid} parentItemType={ItemType.trip} items={trip.items} />
+      <ItemList
+        tripId={trip.uuid}
+        parentItemType={ItemType.trip}
+        items={trip.items}
+        editable={props.editable}
+      />
     </Card>
   );
 };

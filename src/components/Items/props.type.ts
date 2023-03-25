@@ -1,7 +1,8 @@
 import { Item } from "../../models/Item";
 
 export type ItemDetailProps = {
+  tripId?: string;
   item: Item;
-  editable?: boolean;
+  editable: boolean;
   onDelete?: () => void;
 };

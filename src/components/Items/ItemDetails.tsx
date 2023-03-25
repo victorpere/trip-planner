@@ -6,6 +6,7 @@ import { useTripItemService } from "../../hooks/useTripItemService";
 
 type Props = {
   item: Item;
+  editable: boolean;
   tripId?: string;
   onDelete?: (itemId: string) => void;
 };
@@ -25,7 +26,14 @@ const ItemDetails = (props: Props) => {
     }
   };
 
-  return <ItemDetalsComponent item={item} onDelete={deleteHandler} />;
+  return (
+    <ItemDetalsComponent
+      tripId={props.tripId}
+      item={item}
+      editable={props.editable}
+      onDelete={deleteHandler}
+    />
+  );
 };
 
 export default ItemDetails;

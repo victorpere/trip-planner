@@ -5,10 +5,10 @@ import { Item } from "../../models/Item";
 import { itemListComponent } from "./utilities";
 
 type Props = {
+  editable: boolean;
   tripId?: string;
   items?: Item[];
   parentItemType?: string;
-  editable?: boolean;
 };
 
 const ItemList = (props: Props) => {
@@ -23,6 +23,7 @@ const ItemList = (props: Props) => {
           key={item.uuid}
           tripId={props.tripId}
           item={item}
+          editable={props.editable}
           onDelete={onItemDelete}
         />
       ))

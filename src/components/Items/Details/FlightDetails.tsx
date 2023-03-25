@@ -5,7 +5,10 @@ import EditableText from "../../elements/EditableText/EditableText";
 
 import styles from "./EditableText.module.css";
 
-type Props = {};
+type Props = {
+  airportDeparture?: string;
+  airportArrival?: string;
+};
 
 const FlightDetails = (props: Props) => {
   return (
@@ -14,6 +17,7 @@ const FlightDetails = (props: Props) => {
         <MdFlightTakeoff />
         <EditableText
           key="airportDeparture"
+          text={props.airportDeparture}
           editable={true}
           placeholder="From"
           maxLength={3}
@@ -25,6 +29,7 @@ const FlightDetails = (props: Props) => {
         <MdFlightLand />
         <EditableText
           key="airportArrival"
+          text={props.airportArrival}
           editable={true}
           placeholder="To"
           maxLength={3}

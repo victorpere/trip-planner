@@ -40,6 +40,44 @@ export const useTripItemService = () => {
     [tripItemService, auth.isAuthenticated, auth.user]
   );
 
+  const updateItem = useCallback(
+    async (tripId: string, itemType: string, itemId: string, item: Item) => {
+      if (auth.isAuthenticated && auth.user) {
+        const response = await tripItemService.updateItem(
+          tripId,
+          itemType,
+          itemId,
+          item,
+          auth.user.access_token
+        );
+
+        if (response.error) {
+          setError(response.error);
+        }
+      }
+    },
+    [tripItemService, auth.isAuthenticated, auth.user]
+  );
+
+  const patchItem = useCallback(
+    async (tripId: string, itemType: string, itemId: string, item: Item) => {
+      if (auth.isAuthenticated && auth.user) {
+        const response = await tripItemService.patchItem(
+          tripId,
+          itemType,
+          itemId,
+          item,
+          auth.user.access_token
+        );
+
+        if (response.error) {
+          setError(response.error);
+        }
+      }
+    },
+    [tripItemService, auth.isAuthenticated, auth.user]
+  )
+
   const deleteItem = useCallback(
     async (tripId: string, itemType: string, itemId: string) => {
       if (auth.isAuthenticated && auth.user) {
@@ -61,6 +99,8 @@ export const useTripItemService = () => {
   return {
     error,
     createItem,
+    updateItem,
+    patchItem,
     deleteItem,
   };
 };

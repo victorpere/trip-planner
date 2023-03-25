@@ -3,6 +3,7 @@ import React from "react";
 import { FaTrashAlt } from "react-icons/fa";
 
 import Card from "../../Cards/Card";
+import EditableText from "../../elements/EditableText/EditableText";
 import FlightDetails from "../Details/FlightDetails";
 import { ItemDetailProps } from "../props.type";
 
@@ -14,7 +15,13 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
   return (
     <Card className={styles["item-activity"]}>
       <div className="clearfix">
-        <div className="float-left">{props.item.name}</div>
+        <div className="float-left">
+          <EditableText
+            key="itemName"
+            editable={props.editable ?? false}
+            text={props.item.name}
+          />
+        </div>
         <div className="float-left">
           <FlightDetails />
         </div>

@@ -11,10 +11,16 @@ type Props = {
 const TripDetails = (props: Props) => {
   const { getTripDetails, isLoading, error } = useTripService();
   const [trip, setTrip] = useState<Trip | null>();
+  const [editable, setEditable] = useState<boolean>(false);
+
+  const setTripAndEditable = (trip?: Trip, editable?: boolean) => {
+    setTrip(trip);
+    setEditable(editable ?? false);
+  };
 
   useEffect(() => {
     if (props.tripId) {
-      getTripDetails(props.tripId!, setTrip);
+      getTripDetails(props.tripId!, setTripAndEditable);
     }
   }, [getTripDetails, props.tripId]);
 
@@ -33,7 +39,7 @@ const TripDetails = (props: Props) => {
   if (trip) {
     return (
       <div>
-        <ItemDetails item={{ ...trip, type: "trip" }} />
+        <ItemDetails item={{ ...trip, type: "trip" }} editable={editable} />
       </div>
     );
   }
