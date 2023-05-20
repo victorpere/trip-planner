@@ -13,7 +13,7 @@ import { ItemDetailProps } from "../props.type";
 
 const ItemTripDetails = (props: ItemDetailProps) => {
   const [trip, setTrip] = useState<Trip>(props.item as Trip);
-  const { createItem } = useTripItemService();
+  const { createItem, deleteItem } = useTripItemService();
 
   const createItemHandler = (newItem: Item) => {
     const processItem = (itemId?: string) => {
@@ -38,6 +38,19 @@ const ItemTripDetails = (props: ItemDetailProps) => {
     }
   };
 
+  const deleteItemHandler = (deletedItemId: string) => {
+    if (trip.uuid) {
+      deleteItem(trip.uuid, "items", deletedItemId).then(() => {
+        setTrip((prev) => {
+          return {
+            ...prev,
+            items: prev.items?.filter((item) => item.uuid !== deletedItemId),
+          };
+        });
+      });
+    }
+  };
+
   return (
     <Card>
       <div>TripDetails</div>
@@ -52,6 +65,7 @@ const ItemTripDetails = (props: ItemDetailProps) => {
         parentItemType={ItemType.trip}
         items={trip.items}
         editable={props.editable}
+        onDeleteItem={deleteItemHandler}
       />
     </Card>
   );

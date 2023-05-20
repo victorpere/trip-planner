@@ -9,12 +9,14 @@ type Props = {
   tripId?: string;
   items?: Item[];
   parentItemType?: string;
+  onDeleteItem: (itemId: string) => void;
 };
 
 const ItemList = (props: Props) => {
-  const onItemDelete = (itemId: string) => {
+
+  const deleteItemHandler = (itemId: string) => {
     console.log("delete item from list", itemId);
-    // TODO: use state and delete item from list
+    props.onDeleteItem(itemId);
   };
 
   const itemList: JSX.Element[] = props.items
@@ -24,7 +26,7 @@ const ItemList = (props: Props) => {
           tripId={props.tripId}
           item={item}
           editable={props.editable}
-          onDelete={onItemDelete}
+          onDelete={deleteItemHandler}
         />
       ))
     : [];
