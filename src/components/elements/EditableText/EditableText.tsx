@@ -14,6 +14,7 @@ type Props = {
   inputClassName?: string;
   staticClassName?: string;
   onChange?: (key: string, text?: string) => void;
+  onFinishedEditing?: (key: string, text?: string) => void;
 };
 
 const EditableText = (props: Props) => {
@@ -25,7 +26,10 @@ const EditableText = (props: Props) => {
   const [text, setText] = useState<string>(props.text ?? "");
 
   useClickOutside(mainSpanRef, () => {
-    setEditing(false);
+    if (props.editable) {
+      setEditing(false);
+      //props.onFinishedEditing && props.onFinishedEditing(props.key, props.text);
+    }
   });
 
   const startEditing = () => {
