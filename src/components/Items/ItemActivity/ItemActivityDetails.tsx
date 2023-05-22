@@ -29,6 +29,7 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
   const deleteDialog = (
     <ActionDialog
       text={"Are you sure you want to delete this item?"}
+      type="warning"
       buttons={[
         { label: "Yes", action: deleteConfirmButtonHandler },
         { label: "No", action: () => setDeleting(false) },

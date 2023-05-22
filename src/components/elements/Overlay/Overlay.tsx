@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { CSSProperties, ReactElement } from "react";
 import ReactDOM from "react-dom";
 
 import styles from "./Overlay.module.css";
@@ -6,6 +6,7 @@ import styles from "./Overlay.module.css";
 type Props = {
   children: ReactElement;
   className?: string;
+  style?: CSSProperties;
 };
 
 const Overlay = (props: Props) => {
@@ -13,7 +14,7 @@ const Overlay = (props: Props) => {
     <>
       {ReactDOM.createPortal(
         <div className={styles["dialog-screen"]}>
-          <div className={`${styles["center"]} ${styles["dialog"]} ${props.className ?? ""}`}>
+          <div className={`${styles["center"]} ${styles["dialog"]} ${props.className ?? ""}`} style={props.style}>
             {props.children}
           </div>
         </div>,

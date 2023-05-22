@@ -9,6 +9,8 @@
   --background-color: #fff;
   --hightlight-color: #94d6f9;
 
+  --warning-background-color: #ffcdcd;
+
   --header-text-color: #fff;
   --header-background-color: #ffa500;
 
@@ -34,6 +36,8 @@
     --text-color: #eee;
     --background-color: #121212;
     --highlight-color: #fff;
+
+    --warning-background-color: #ffcdcd;
 
     --header-text-color: #ddd;
     --header-background-color: #aa7928;
