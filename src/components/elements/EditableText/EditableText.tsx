@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 import useClickOutside from "./useOutsideClick";
 
 type Props = {
-  key: string;
+  fieldName: string;
   editable: boolean;
   editing?: boolean;
   text?: string;
@@ -26,9 +26,12 @@ const EditableText = (props: Props) => {
   const [text, setText] = useState<string>(props.text ?? "");
 
   useClickOutside(mainSpanRef, () => {
-    if (props.editable) {
+    if (props.editable && editing) {
       setEditing(false);
-      //props.onFinishedEditing && props.onFinishedEditing(props.key, props.text);
+      if (props.onFinishedEditing && text !== props.text) {
+        console.log("click outside key ", props.fieldName, " from ", props.text, " to ", text);
+        props.onFinishedEditing(props.fieldName, text);
+      }
     }
   });
 
@@ -41,7 +44,7 @@ const EditableText = (props: Props) => {
   const changeTextHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
     if (props.onChange) {
-      props.onChange(props.key, event.target.value);
+      props.onChange(props.fieldName, event.target.value);
     }
   };
 

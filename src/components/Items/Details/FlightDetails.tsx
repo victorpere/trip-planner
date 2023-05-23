@@ -16,7 +16,7 @@ const FlightDetails = (props: Props) => {
       <span>
         <MdFlightTakeoff />
         <EditableText
-          key="airportDeparture"
+          fieldName="airportDeparture"
           text={props.airportDeparture}
           editable={true}
           placeholder="From"
@@ -28,7 +28,7 @@ const FlightDetails = (props: Props) => {
       <span>
         <MdFlightLand />
         <EditableText
-          key="airportArrival"
+          fieldName="airportArrival"
           text={props.airportArrival}
           editable={true}
           placeholder="To"

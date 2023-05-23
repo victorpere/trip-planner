@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { FaTrashAlt } from "react-icons/fa";
 
+import { useTripItemService } from "../../../hooks/useTripItemService";
 import ActionDialog from "../../Common/ActionDialog";
 import Card from "../../Cards/Card";
 import EditableText from "../../elements/EditableText/EditableText";
@@ -12,9 +13,19 @@ import styles from "./ItemDetails.module.css";
 
 const ItemActivityDetails = (props: ItemDetailProps) => {
   const [deleting, setDeleting] = useState<boolean>(false);
+  const { patchItem } = useTripItemService();
 
   const didEditText = (key: string, text?: string) => {
-    console.log("Edited ", key, " value ", text);
+    console.log("Edited ", key, " to value ", text);
+    if (props.tripId && props.item.uuid && text) {
+      patchItem(props.tripId, "items", props.item.uuid, {
+        uuid: props.item.uuid,
+        type: props.item.type,
+        name: text,
+      }).then(() => {
+        console.log("updated db");
+      });
+    }
   };
 
   const deleteButtonHandler = () => {
@@ -44,7 +55,7 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
         <div className="clearfix">
           <div className="float-left">
             <EditableText
-              key="itemName"
+              fieldName="itemName"
               editable={props.editable ?? false}
               text={props.item.name}
               onFinishedEditing={didEditText}

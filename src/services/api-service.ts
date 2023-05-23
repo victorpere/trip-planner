@@ -69,7 +69,18 @@ export class ApiService implements IApiService {
     return response;
   }
 
-  patch(route: string, params: {}, headers: {}, body: {}): Promise<Response> {
-    throw new Error("Method not implemented.");
+  async patch(route: string, params: {}, headers: {}, body: {}): Promise<Response> {
+    console.log("api.patch");
+    console.log(route);
+    console.log(params);
+    console.log(headers);
+    console.log(body);
+    const response = await fetch(route + queryString(params), {
+      method: "PATCH",
+      headers: headers,
+      body: JSON.stringify(body),
+    });
+    console.log(response);
+    return response;
   }
 }
