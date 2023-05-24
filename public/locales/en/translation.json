@@ -4,5 +4,7 @@
   "Sign out": "Sign out",
   "Are you sure you want to delete this trip?": "Are you sure you want to delete this trip?",
   "Yes": "Yes",
-  "No": "No"
+  "No": "No",
+
+  "WarningDeleteItem": "Are you sure you want to delete {{itemType}} named {{itemName}}?"
 }

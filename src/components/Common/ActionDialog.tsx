@@ -6,6 +6,7 @@ import styles from "./ActionDialog.module.css";
 
 type Props = {
   text: string;
+  textVars?: {};
   buttons: { label: string; action: () => void }[];
   className?: string;
   color?: string;
@@ -18,13 +19,15 @@ const ActionDialog = (props: Props) => {
     backgroundColor: props.color,
   };
 
+  const text = props.textVars ? t(props.text, props.textVars) : t(props.text);
+
   return (
     <Overlay
       className={`${props.className} ${props.type && styles[props.type]}`}
       style={style}
     >
       <>
-        <div>{t(props.text)}</div>
+        <div>{text}</div>
         <div>
           {props.buttons.map((button, index) => (
             <button key={index} onClick={button.action}>
