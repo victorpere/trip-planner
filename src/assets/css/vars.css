@@ -20,6 +20,7 @@
 
   --trip-background-color: lightskyblue;
   --item-activity-background-color: aqua;
+  --item-group-seq-background-color: #353535;
 
   --shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   --shadow-highlighted: 0 1px 4px rgb(60, 132, 215);
@@ -48,6 +49,7 @@
 
     --trip-background-color: #3e7a96;
     --item-activity-background-color: #50528a;
+    --item-group-seq-background-color: #353535;
 
     --shadow: 0 0 0 1px rgba(60, 60, 60, 0.222);
     --shadow-highlighted: 0 0 0 1px rgb(181, 208, 242);

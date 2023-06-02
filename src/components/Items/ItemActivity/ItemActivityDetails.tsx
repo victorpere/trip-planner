@@ -29,11 +29,11 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
   };
 
   const deleteButtonHandler = () => {
-    setDeleting(true);
+    props.editable && setDeleting(true);
   };
 
   const deleteConfirmButtonHandler = () => {
-    props.onDelete && props.onDelete();
+    props.editable && props.onDelete && props.onDelete();
     setDeleting(false);
   };
 
