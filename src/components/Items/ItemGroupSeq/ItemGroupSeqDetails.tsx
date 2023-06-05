@@ -7,6 +7,7 @@ import styles from "./ItemGroupSeqDetails.module.css";
 import ItemList from "../ItemList";
 import GroupSequence from "../../../models/GroupSequence";
 import { FaTrashAlt } from "react-icons/fa";
+import { ItemType } from "../../../config/enums";
 
 const ItemGroupSeqDetails = (props: ItemDetailProps) => {
   return (
@@ -23,6 +24,7 @@ const ItemGroupSeqDetails = (props: ItemDetailProps) => {
         <ItemList
           tripId={props.tripId}
           items={(props.item as GroupSequence).items}
+          parentItemType={ItemType.groupSeq}
           editable={props.editable}
         />
       </Card>

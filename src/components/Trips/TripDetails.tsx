@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import useTripService from "../../hooks/useTripService";
 import Trip from "../../models/Trip";
 import ItemDetails from "../Items/ItemDetails";
+import { ItemType } from "../../config/enums";
 
 type Props = {
   tripId?: string;
@@ -39,7 +40,11 @@ const TripDetails = (props: Props) => {
   if (trip) {
     return (
       <div>
-        <ItemDetails item={{ ...trip, type: "trip" }} editable={editable} />
+        <ItemDetails
+          item={{ ...trip, type: "trip" }}
+          parentItemType={ItemType.trip}
+          editable={editable}
+        />
       </div>
     );
   }

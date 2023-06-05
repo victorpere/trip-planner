@@ -10,6 +10,7 @@ import FlightDetails from "../Details/FlightDetails";
 import { ItemDetailProps } from "../props.type";
 
 import styles from "./ItemDetails.module.css";
+import { ItemType } from "../../../config/enums";
 
 const ItemActivityDetails = (props: ItemDetailProps) => {
   const [deleting, setDeleting] = useState<boolean>(false);
@@ -24,12 +25,19 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
         name: text,
       }).then(() => {
         console.log("updated db");
+        props.editable &&
+          props.onUpdate &&
+          props.onUpdate({ ...props.item, name: text });
       });
     }
   };
 
   const deleteButtonHandler = () => {
     props.editable && setDeleting(true);
+  };
+
+  const alternativeButtonHandler = () => {
+    // TODO: dialog for new activity. After creation, generate new group-alt and add exising and new activities to it
   };
 
   const deleteConfirmButtonHandler = () => {
@@ -49,6 +57,8 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
     />
   );
 
+  // TODO: item categories
+
   return (
     <>
       {deleting && deleteDialog}
@@ -65,9 +75,18 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
           <div className="float-left">
             <FlightDetails />
           </div>
+
           <div className="float-right button">
             {props.editable && <FaTrashAlt onClick={deleteButtonHandler} />}
           </div>
+          {props.parentItemType !== ItemType.groupAlt && (
+            <button
+              className="float-right button"
+              onClick={alternativeButtonHandler}
+            >
+              Add alternative
+            </button>
+          )}
         </div>
       </Card>
     </>

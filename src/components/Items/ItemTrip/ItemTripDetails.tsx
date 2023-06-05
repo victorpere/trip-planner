@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useTripItemService } from "../../../hooks/useTripItemService";
 import { Item } from "../../../models/Item";
@@ -51,6 +51,32 @@ const ItemTripDetails = (props: ItemDetailProps) => {
     }
   };
 
+  const updateItemHandler = (updatedItem: Item) => {
+    if (trip.uuid) {
+      setTrip((prev) => {
+        if (
+          prev.items &&
+          prev.items.find((item) => item.uuid && item.uuid === updatedItem.uuid)
+        ) {
+          return {
+            ...prev,
+            items: [
+              ...prev.items.filter((item) => item.uuid !== updatedItem.uuid),
+              updatedItem,
+            ],
+          };
+        }
+
+        return prev;
+      });
+    }
+  };
+
+  useEffect(() => {
+    console.log("ItemTripDetails useEffect");
+    console.log(trip);
+  }, [trip]);
+
   return (
     <Card>
       <div>TripDetails</div>
@@ -66,6 +92,7 @@ const ItemTripDetails = (props: ItemDetailProps) => {
         items={trip.items}
         editable={props.editable}
         onDeleteItem={deleteItemHandler}
+        onUpdateItem={updateItemHandler}
       />
     </Card>
   );
