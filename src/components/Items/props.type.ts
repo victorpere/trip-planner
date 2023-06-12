@@ -8,4 +8,5 @@ export type ItemDetailProps = {
   editable: boolean;
   onUpdate?: (item: Item) => void;
   onDelete?: () => void;
+  onCreateGroup?: () => void;
 };

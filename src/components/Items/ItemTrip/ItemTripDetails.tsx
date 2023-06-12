@@ -72,6 +72,10 @@ const ItemTripDetails = (props: ItemDetailProps) => {
     }
   };
 
+  const createGroupHandler = (itemId: String) => {
+    console.log("ItemTripDetails createGroupHandler", itemId);
+  };
+
   useEffect(() => {
     console.log("ItemTripDetails useEffect");
     console.log(trip);
@@ -81,11 +85,13 @@ const ItemTripDetails = (props: ItemDetailProps) => {
     <Card>
       <div>TripDetails</div>
       <div>{trip.name}</div>
-      <NewItem<Activity>
-        createItem={activityCreator}
-        onCreateNewItem={createItemHandler}
-        label="activity name"
-      />
+      {props.editable && (
+        <NewItem<Activity>
+          createItem={activityCreator}
+          onCreateNewItem={createItemHandler}
+          label="activity name"
+        />
+      )}
       <ItemList
         tripId={trip.uuid}
         parentItemType={ItemType.trip}
@@ -93,6 +99,7 @@ const ItemTripDetails = (props: ItemDetailProps) => {
         editable={props.editable}
         onDeleteItem={deleteItemHandler}
         onUpdateItem={updateItemHandler}
+        onCreateGroup={createGroupHandler}
       />
     </Card>
   );

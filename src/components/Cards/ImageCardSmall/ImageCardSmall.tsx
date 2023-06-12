@@ -5,8 +5,8 @@ import Card from "../Card";
 
 import styles from "./ImageCardSmall.module.css";
 
-type Props = {
-  title: string;
+type ImageCardProps = {
+  title?: string;
   linkUrl?: string;
   imageUrl?: string;
   className?: string;
@@ -14,7 +14,7 @@ type Props = {
   rightContent?: ReactNode;
 };
 
-const ImageCardSmall = (props: Props) => {
+const ImageCardSmall = (props: ImageCardProps) => {
   const imgElement = props.imageUrl && (
     <img
       src={props.imageUrl}

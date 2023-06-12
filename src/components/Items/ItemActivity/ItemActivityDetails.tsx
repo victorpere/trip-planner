@@ -38,6 +38,8 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
 
   const alternativeButtonHandler = () => {
     // TODO: dialog for new activity. After creation, generate new group-alt and add exising and new activities to it
+    console.log("ItemActivityDetails alternativeButtonHandler");
+    props.editable && props.onCreateGroup && props.onCreateGroup();
   };
 
   const deleteConfirmButtonHandler = () => {
@@ -79,7 +81,7 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
           <div className="float-right button">
             {props.editable && <FaTrashAlt onClick={deleteButtonHandler} />}
           </div>
-          {props.parentItemType !== ItemType.groupAlt && (
+          {props.editable && props.parentItemType !== ItemType.groupAlt && (
             <button
               className="float-right button"
               onClick={alternativeButtonHandler}
