@@ -40,7 +40,7 @@ const useTripService = () => {
 
       const response = await tripApi.getTripDetails(
         tripId,
-        auth.user?.access_token
+        auth.isAuthenticated ? auth.user?.access_token : undefined
       );
 
       setTrip(response.trip, response.editable);
@@ -51,7 +51,7 @@ const useTripService = () => {
 
       setIsLoading(false);
     },
-    [auth.user, tripApi]
+    [auth.isAuthenticated, auth.user, tripApi]
   );
 
   const createTrip = useCallback(
