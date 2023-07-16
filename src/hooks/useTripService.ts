@@ -76,7 +76,7 @@ const useTripService = () => {
   );
 
   const updateTrip = useCallback(
-    async (trip: Trip) => {
+    async (trip: Trip, setTrip: (trip: Trip) => void) => {
       setIsLoading(true);
       if (auth.isAuthenticated) {
         const response = await tripApi.updateTrip(
@@ -87,6 +87,8 @@ const useTripService = () => {
         if (response.error) {
           setError(response.error);
         }
+
+        response.trip && setTrip(response.trip);
       }
       setIsLoading(false);
     },

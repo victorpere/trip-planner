@@ -11,9 +11,12 @@ import { ItemDetailProps } from "../props.type";
 
 import styles from "./ItemDetails.module.css";
 import { ItemType } from "../../../config/enums";
+import ItemActivityNew from "./ItemActivityNew";
+import { Activity } from "../../../models/Activity";
 
 const ItemActivityDetails = (props: ItemDetailProps) => {
   const [deleting, setDeleting] = useState<boolean>(false);
+  const [creatingAlt, setCreatingAlt] = useState<boolean>(false);
   const { patchItem } = useTripItemService();
 
   const didEditText = (key: string, text?: string) => {
@@ -37,15 +40,23 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
   };
 
   const alternativeButtonHandler = () => {
-    // TODO: dialog for new activity. After creation, generate new group-alt and add exising and new activities to it
     console.log("ItemActivityDetails alternativeButtonHandler");
-    props.editable && props.onCreateGroup && props.onCreateGroup();
+    setCreatingAlt(true);
   };
 
   const deleteConfirmButtonHandler = () => {
     props.editable && props.onDelete && props.onDelete();
     setDeleting(false);
   };
+
+  const alternativeCreatedHandler = (newActivity: Activity) => {
+    console.log("ItemActivityDetails alternativeCreatedHandler", newActivity);
+
+    // TODO: pass this item and new item up
+
+    props.editable && props.onCreateGroup && props.onCreateGroup([newActivity]);
+    setCreatingAlt(false);
+  }
 
   const deleteDialog = (
     <ActionDialog
@@ -59,11 +70,21 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
     />
   );
 
+  const createAltDialog = (
+    <ItemActivityNew
+      onCreate={alternativeCreatedHandler}
+      onCancel={() => {
+        setCreatingAlt(false);
+      }}
+    />
+  );
+
   // TODO: item categories
 
   return (
     <>
-      {deleting && deleteDialog}
+      {props.editable && deleting && deleteDialog}
+      {props.editable && creatingAlt && createAltDialog}
       <Card className={styles["item-activity"]}>
         <div className="clearfix">
           <div className="float-left">

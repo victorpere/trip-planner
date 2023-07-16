@@ -10,10 +10,13 @@ import ItemList from "../ItemList";
 import { activityCreator } from "../../../models/Activity";
 import { ItemType } from "../../../config/enums";
 import { ItemDetailProps } from "../props.type";
+import GroupAlternatives from "../../../models/GroupAlternatives";
+import useTripService from "../../../hooks/useTripService";
 
 const ItemTripDetails = (props: ItemDetailProps) => {
   const [trip, setTrip] = useState<Trip>(props.item as Trip);
   const { createItem, deleteItem } = useTripItemService();
+  const { updateTrip } = useTripService();
 
   const createItemHandler = (newItem: Item) => {
     const processItem = (itemId?: string) => {
@@ -52,28 +55,50 @@ const ItemTripDetails = (props: ItemDetailProps) => {
   };
 
   const updateItemHandler = (updatedItem: Item) => {
-    if (trip.uuid) {
-      setTrip((prev) => {
-        if (
-          prev.items &&
-          prev.items.find((item) => item.uuid && item.uuid === updatedItem.uuid)
-        ) {
-          return {
-            ...prev,
-            items: [
-              ...prev.items.filter((item) => item.uuid !== updatedItem.uuid),
-              updatedItem,
-            ],
-          };
-        }
+    if (
+      trip.uuid &&
+      trip.items &&
+      trip.items.find((item) => item.uuid && item.uuid === updatedItem.uuid)
+    ) {
+      const updatedTrip = {
+        ...trip,
+        items: [
+          ...trip.items.filter((item) => item.uuid !== updatedItem.uuid),
+          updatedItem,
+        ],
+      };
 
-        return prev;
-      });
+      updateTrip(updatedTrip, setTrip).then(() => {});
     }
   };
 
-  const createGroupHandler = (itemId: String) => {
+  const createGroupHandler = (itemId: String, newItems: Item[]) => {
     console.log("ItemTripDetails createGroupHandler", itemId);
+    // TODO: create new group and add old and new items to it
+
+    if (trip.items) {
+      const oldItem = trip.items.find((i) => i.uuid === itemId);
+
+      if (oldItem) {
+        const newGroup: GroupAlternatives = {
+          type: ItemType.groupAlt,
+          items: [oldItem, ...newItems],
+        };
+
+        const updatedTrip = {
+          ...trip,
+          items: [...trip.items.filter((i) => i.uuid !== itemId), newGroup],
+        };
+
+        updateTrip(updatedTrip, setTrip).then(() => {
+          console.log(
+            "ItemTripDetails createGroupHandler",
+            "trip updated",
+            updatedTrip
+          );
+        });
+      }
+    }
   };
 
   useEffect(() => {

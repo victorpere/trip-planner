@@ -8,6 +8,7 @@ import {
   TripsResponse,
   TripDetailsResponse,
   CreateTripResponse,
+  UpdateTripResponse,
 } from "./types/response.type";
 import { authHeader } from "./utilities";
 
@@ -115,9 +116,9 @@ export default class TripService implements ITripService {
    *
    * @param trip
    * @param token
-   * @returns
+   * @returns updated trip
    */
-  async updateTrip(trip: Trip, token: string): Promise<BaseResponse> {
+  async updateTrip(trip: Trip, token: string): Promise<UpdateTripResponse> {
     if (!trip.uuid) {
       return { error: "trip missing uuid" };
     }
@@ -134,6 +135,10 @@ export default class TripService implements ITripService {
         body
       );
       if (response.ok) {
+        const body = await response.json();
+        if (body["data"]) {
+          return { trip: body["data"]}
+        }
         return {};
       }
 

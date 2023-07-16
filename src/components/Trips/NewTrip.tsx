@@ -25,9 +25,7 @@ const NewTrip = (props: Props) => {
     const processImages = (imageInfos: ImageInfo[]) => {
       if (imageInfos.length > 0) {
         trip.imageUrl = imageInfos[0].url;
-        updateTrip(trip).then(() => {
-          props.onUpdateTrip(trip);
-        });
+        updateTrip(trip, props.onUpdateTrip);
       }
     };
 

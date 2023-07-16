@@ -12,7 +12,7 @@ type ItemListProps = {
   parentItemType: ItemType;
   onDeleteItem?: (itemId: string) => void;
   onUpdateItem?: (item: Item) => void;
-  onCreateGroup?: (itemId: string) => void;
+  onCreateGroup?: (itemId: string, newItems: Item[]) => void;
 };
 
 const ItemList = (props: ItemListProps) => {
@@ -26,9 +26,9 @@ const ItemList = (props: ItemListProps) => {
     props.editable && props.onUpdateItem && props.onUpdateItem(item);
   };
 
-  const createGroupHandler = (itemId: string) => {
+  const createGroupHandler = (itemId: string, newItems: Item[]) => {
     console.log("ItemList createGroupHandler", itemId);
-    props.editable && props.onCreateGroup && props.onCreateGroup(itemId);
+    props.editable && props.onCreateGroup && props.onCreateGroup(itemId, newItems);
   };
 
   const itemList: JSX.Element[] = props.items

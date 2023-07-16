@@ -25,6 +25,7 @@ export const itemDetailsComponent = (itemType: string) => {
 export const itemListComponent = (parentItemType?: string) => {
   switch (parentItemType) {
     case ItemType.trip:
+    case ItemType.groupSeq:
       return VerticalList;
     default:
       return FlexItemList;

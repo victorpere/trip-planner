@@ -17,6 +17,10 @@ export type CreateTripResponse = BaseResponse & {
   tripId?: string;
 };
 
+export type UpdateTripResponse = BaseResponse & {
+  trip?: Trip;
+};
+
 export type CreateItemResponse = BaseResponse & {
   itemId?: string;
 };

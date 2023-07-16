@@ -11,7 +11,7 @@ type Props = {
   tripId?: string;
   onDelete?: (itemId: string) => void;
   onUpdate?: (item: Item) => void;
-  onCreateGroup?: (itemId: string) => void;
+  onCreateGroup?: (itemId: string, newItems: Item[]) => void;
 };
 
 const ItemDetails = (props: Props) => {
@@ -30,12 +30,12 @@ const ItemDetails = (props: Props) => {
     props.editable && props.onUpdate && item.uuid && props.onUpdate(item);
   };
 
-  const createGroupHandler = () => {
-    console.log("ItemDetails createNewGroupHandler");
+  const createGroupHandler = (newItems: Item[]) => {
+    console.log("ItemDetails createNewGroupHandler", newItems);
     props.editable &&
       props.onCreateGroup &&
       props.item.uuid &&
-      props.onCreateGroup(props.item.uuid);
+      props.onCreateGroup(props.item.uuid, newItems);
   };
 
   return (
