@@ -99,8 +99,8 @@ export default class TripService implements ITripService {
 
       if (response.ok) {
         const body = await response.json();
-        if (body["tripId"]) {
-          return { tripId: body["tripId"] };
+        if (body["data"]) {
+          return { trip: body["data"] };
         } else {
           return { error: "something went wrong" };
         }

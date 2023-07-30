@@ -35,7 +35,10 @@ const useTripService = () => {
   );
 
   const getTripDetails = useCallback(
-    async (tripId: string, setTrip: (trip?: Trip, editable?: boolean) => void) => {
+    async (
+      tripId: string,
+      setTrip: (trip?: Trip, editable?: boolean) => void
+    ) => {
       setIsLoading(true);
 
       const response = await tripApi.getTripDetails(
@@ -55,7 +58,7 @@ const useTripService = () => {
   );
 
   const createTrip = useCallback(
-    async (trip: Trip, setTripId: (tripId?: string) => void) => {
+    async (trip: Trip, setTrip: (trip: Trip) => void) => {
       setIsLoading(true);
 
       if (auth.isAuthenticated) {
@@ -63,11 +66,12 @@ const useTripService = () => {
           trip,
           auth.user!.access_token
         );
-        setTripId(response.tripId);
 
         if (response.error) {
           setError(response.error);
         }
+
+        response.trip && setTrip(response.trip);
       }
 
       setIsLoading(false);

@@ -14,25 +14,19 @@ type Props = {
 // TODO: localized strings
 
 const NewTrip = (props: Props) => {
-  const { createTrip, updateTrip } = useTripService();
+  const { createTrip } = useTripService();
   const { getImages } = useImageService();
 
-  const createNewTripHandler = (trip: Trip) => {
-    const setTripId = (tripId?: string) => {
-      trip.uuid = tripId;
-    };
-
+  const createNewTripHandler = (createdTrip: Trip) => {
     const processImages = (imageInfos: ImageInfo[]) => {
       if (imageInfos.length > 0) {
-        trip.imageUrl = imageInfos[0].url;
-        updateTrip(trip, props.onUpdateTrip);
+        createdTrip.imageUrl = imageInfos[0].url;
       }
+
+      createTrip(createdTrip, props.onCreateTrip);
     };
 
-    createTrip(trip, setTripId).then(() => {
-      props.onCreateTrip(trip);
-      getImages(processImages, trip.name);
-    });
+    getImages(processImages, createdTrip.name);
   };
 
   return (
