@@ -14,9 +14,11 @@ const HeaderUser = () => {
     return (
       <div>
         <div>
-          {auth.user?.profile.given_name ??
-            auth.user?.profile.name ??
-            auth.user?.profile.email}
+          <Link to="/profile">
+            {auth.user?.profile.given_name ??
+              auth.user?.profile.name ??
+              auth.user?.profile.email}
+          </Link>
         </div>
         <div>
           <Link to="/signout">{t("Sign out")}</Link>

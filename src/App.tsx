@@ -5,6 +5,7 @@ import Trip from "./pages/Trip";
 import Auth from "./pages/Auth";
 import Signin from "./pages/Signin";
 import Signout from "./pages/Signout";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="trip/:tripId" element={<Trip />} />
           <Route path="auth" element={<Auth />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
         <Route path="/" element={<Layout showUser={false} />}>
           <Route path="signin" element={<Signin />} />
