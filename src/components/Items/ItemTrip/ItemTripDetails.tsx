@@ -55,21 +55,25 @@ const ItemTripDetails = (props: ItemDetailProps) => {
   };
 
   const updateItemHandler = (updatedItem: Item) => {
-    if (
-      trip.uuid &&
-      trip.items &&
-      trip.items.find((item) => item.uuid && item.uuid === updatedItem.uuid)
-    ) {
-      const updatedTrip = {
-        ...trip,
-        items: [
-          ...trip.items.filter((item) => item.uuid !== updatedItem.uuid),
-          updatedItem,
-        ],
-      };
+    console.log("ItemTripDetails updateItemHandler", updatedItem)
+    setTrip((prev) => {
+      if (
+        prev.uuid &&
+        prev.items &&
+        prev.items.find((item) => item.uuid && item.uuid === updatedItem.uuid)
+      ) {
+        const updatedTrip = {
+          ...prev,
+          items: [
+            ...prev.items.filter((item) => item.uuid !== updatedItem.uuid),
+            updatedItem,
+          ],
+        };
 
-      updateTrip(updatedTrip, setTrip).then(() => {});
-    }
+        return updatedTrip;
+      }
+      return prev;
+    })
   };
 
   const createGroupHandler = (itemId: String, newItems: Item[]) => {
