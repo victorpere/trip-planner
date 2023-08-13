@@ -15,7 +15,7 @@ import useTripService from "../../../hooks/useTripService";
 
 const ItemTripDetails = (props: ItemDetailProps) => {
   const [trip, setTrip] = useState<Trip>(props.item as Trip);
-  const { createItem, deleteItem } = useTripItemService();
+  const { createItem } = useTripItemService();
   const { updateTrip } = useTripService();
 
   const createItemHandler = (newItem: Item) => {
@@ -42,20 +42,17 @@ const ItemTripDetails = (props: ItemDetailProps) => {
   };
 
   const deleteItemHandler = (deletedItemId: string) => {
-    if (trip.uuid) {
-      deleteItem(trip.uuid, "items", deletedItemId).then(() => {
-        setTrip((prev) => {
-          return {
-            ...prev,
-            items: prev.items?.filter((item) => item.uuid !== deletedItemId),
-          };
-        });
-      });
-    }
+    console.log("ItemTripDetails deleteItemHandler", deletedItemId);
+    setTrip((prev) => {
+      return {
+        ...prev,
+        items: prev.items?.filter((item) => item.uuid !== deletedItemId),
+      };
+    });
   };
 
   const updateItemHandler = (updatedItem: Item) => {
-    console.log("ItemTripDetails updateItemHandler", updatedItem)
+    console.log("ItemTripDetails updateItemHandler", updatedItem);
     setTrip((prev) => {
       if (
         prev.uuid &&
@@ -73,7 +70,7 @@ const ItemTripDetails = (props: ItemDetailProps) => {
         return updatedTrip;
       }
       return prev;
-    })
+    });
   };
 
   const createGroupHandler = (itemId: String, newItems: Item[]) => {

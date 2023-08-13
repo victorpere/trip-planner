@@ -3,6 +3,7 @@ import React from "react";
 import { Item } from "../../models/Item";
 import { itemDetailsComponent } from "./utilities";
 import { ItemType } from "../../config/enums";
+import { useTripItemService } from "../../hooks/useTripItemService";
 
 type Props = {
   item: Item;
@@ -15,14 +16,17 @@ type Props = {
 };
 
 const ItemDetails = (props: Props) => {
+  const { deleteItem } = useTripItemService();
   const ItemDetalsComponent = itemDetailsComponent(props.item.type);
 
   const deleteHandler = () => {
     console.log("ItemDetails deleteHandler", props.item.uuid);
-    props.editable &&
-      props.onDelete &&
-      props.item.uuid &&
-      props.onDelete(props.item.uuid);
+
+    if (props.editable && props.item.uuid && props.tripId) {
+      deleteItem(props.tripId, "items", props.item.uuid).then(() => {
+        props.onDelete && props.item.uuid && props.onDelete(props.item.uuid);
+      })
+    }
   };
 
   const updateHandler = (item: Item) => {
