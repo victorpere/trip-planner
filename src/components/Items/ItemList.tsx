@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import ItemDetails from "./ItemDetails";
 import { Item } from "../../models/Item";
@@ -18,6 +19,7 @@ type ItemListProps = {
 const ItemList = (props: ItemListProps) => {
   const deleteItemHandler = (itemId: string) => {
     console.log("ItemList deleteItemHandler", itemId);
+
     props.editable && props.onDeleteItem && props.onDeleteItem(itemId);
   };
 
@@ -28,13 +30,15 @@ const ItemList = (props: ItemListProps) => {
 
   const createGroupHandler = (itemId: string, newItems: Item[]) => {
     console.log("ItemList createGroupHandler", itemId);
-    props.editable && props.onCreateGroup && props.onCreateGroup(itemId, newItems);
+    props.editable &&
+      props.onCreateGroup &&
+      props.onCreateGroup(itemId, newItems);
   };
 
   const itemList: JSX.Element[] = props.items
     ? props.items?.map((item) => (
         <ItemDetails
-          key={item.uuid}
+          key={item.uuid ?? uuidv4()}
           tripId={props.tripId}
           item={item}
           parentItemType={props.parentItemType}

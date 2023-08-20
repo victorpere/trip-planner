@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useTripItemService } from "../../../hooks/useTripItemService";
 import { Item } from "../../../models/Item";
 import Trip from "../../../models/Trip";
 import { Activity } from "../../../models/Activity";
@@ -11,73 +10,60 @@ import { activityCreator } from "../../../models/Activity";
 import { ItemType } from "../../../config/enums";
 import { ItemDetailProps } from "../props.type";
 import GroupAlternatives from "../../../models/GroupAlternatives";
-import useTripService from "../../../hooks/useTripService";
 
 const ItemTripDetails = (props: ItemDetailProps) => {
-  const [trip, setTrip] = useState<Trip>(props.item as Trip);
-  const { createItem } = useTripItemService();
-  const { updateTrip } = useTripService();
+  const trip = props.item as Trip;
 
   const createItemHandler = (newItem: Item) => {
-    const processItem = (itemId?: string) => {
-      if (itemId) {
-        newItem.uuid = itemId;
+    console.log("ItemTripDetails createItemHandler");
 
-        setTrip((prev) => {
-          let newItems: Item[];
-          if (trip.items) {
-            newItems = [...trip.items, newItem];
-          } else {
-            newItems = [newItem];
-          }
-
-          return { ...prev, items: newItems };
-        });
+    if (props.editable && props.onUpdate) {
+      let newItems: Item[];
+      if (trip.items) {
+        newItems = [...trip.items, newItem];
+      } else {
+        newItems = [newItem];
       }
-    };
 
-    if (trip.uuid) {
-      createItem(trip.uuid, "trip", trip.uuid, "items", newItem, processItem);
+      trip.items = newItems;
+
+      props.onUpdate(trip);
     }
   };
 
   const deleteItemHandler = (deletedItemId: string) => {
     console.log("ItemTripDetails deleteItemHandler", deletedItemId);
-    setTrip((prev) => {
-      return {
-        ...prev,
-        items: prev.items?.filter((item) => item.uuid !== deletedItemId),
-      };
-    });
+
+    if (props.editable && props.onUpdate) {
+      trip.items = trip.items?.filter((item) => item.uuid !== deletedItemId);
+      props.onUpdate(trip);
+    }
   };
 
   const updateItemHandler = (updatedItem: Item) => {
     console.log("ItemTripDetails updateItemHandler", updatedItem);
-    setTrip((prev) => {
-      if (
-        prev.uuid &&
-        prev.items &&
-        prev.items.find((item) => item.uuid && item.uuid === updatedItem.uuid)
-      ) {
-        const updatedTrip = {
-          ...prev,
-          items: [
-            ...prev.items.filter((item) => item.uuid !== updatedItem.uuid),
-            updatedItem,
-          ],
-        };
 
-        return updatedTrip;
-      }
-      return prev;
-    });
+    if (
+      props.editable &&
+      props.onUpdate &&
+      trip.uuid &&
+      trip.items &&
+      trip.items.find((item) => item.uuid && item.uuid === updatedItem.uuid)
+    ) {
+      trip.items = [
+        ...trip.items.filter((item) => item.uuid !== updatedItem.uuid),
+        updatedItem,
+      ];
+
+      props.onUpdate(trip);
+    }
   };
 
   const createGroupHandler = (itemId: String, newItems: Item[]) => {
     console.log("ItemTripDetails createGroupHandler", itemId);
     // TODO: create new group and add old and new items to it
 
-    if (trip.items) {
+    if (props.editable && props.onUpdate && trip.items) {
       const oldItem = trip.items.find((i) => i.uuid === itemId);
 
       if (oldItem) {
@@ -86,26 +72,12 @@ const ItemTripDetails = (props: ItemDetailProps) => {
           items: [oldItem, ...newItems],
         };
 
-        const updatedTrip = {
-          ...trip,
-          items: [...trip.items.filter((i) => i.uuid !== itemId), newGroup],
-        };
+        trip.items = [...trip.items.filter((i) => i.uuid !== itemId), newGroup];
 
-        updateTrip(updatedTrip, setTrip).then(() => {
-          console.log(
-            "ItemTripDetails createGroupHandler",
-            "trip updated",
-            updatedTrip
-          );
-        });
+        props.onUpdate(trip);
       }
     }
   };
-
-  useEffect(() => {
-    console.log("ItemTripDetails useEffect");
-    console.log(trip);
-  }, [trip]);
 
   return (
     <Card>

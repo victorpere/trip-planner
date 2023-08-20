@@ -6,7 +6,7 @@ export type ItemDetailProps = {
   item: Item;
   parentItemType: ItemType;
   editable: boolean;
-  onUpdate?: (item: Item, push?: boolean) => void;
+  onUpdate?: (item: Item) => void;
   onDelete?: () => void;
   onCreateGroup?: (newItems: Item[]) => void;
 };
