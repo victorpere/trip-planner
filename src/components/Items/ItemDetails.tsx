@@ -16,7 +16,7 @@ type Props = {
 };
 
 const ItemDetails = (props: Props) => {
-  const { deleteItem } = useTripItemService();
+  const { updateItem, deleteItem } = useTripItemService();
   const ItemDetalsComponent = itemDetailsComponent(props.item.type);
 
   const deleteHandler = () => {
@@ -25,13 +25,22 @@ const ItemDetails = (props: Props) => {
     if (props.editable && props.item.uuid && props.tripId) {
       deleteItem(props.tripId, "items", props.item.uuid).then(() => {
         props.onDelete && props.item.uuid && props.onDelete(props.item.uuid);
-      })
+      });
     }
   };
 
-  const updateHandler = (item: Item) => {
+  const updateHandler = (item: Item, push?: boolean) => {
     console.log("ItemDetails updateHandler", props.item.uuid);
-    props.editable && props.onUpdate && item.uuid && props.onUpdate(item);
+
+    if (props.editable && props.item.uuid && props.tripId && item.uuid) {
+      if (push) {
+        updateItem(props.tripId, "items", item.uuid, item).then(() => {
+          props.onUpdate && props.onUpdate(item);
+        });
+      } else {
+        props.onUpdate && props.onUpdate(item);
+      }
+    }
   };
 
   const createGroupHandler = (newItems: Item[]) => {
