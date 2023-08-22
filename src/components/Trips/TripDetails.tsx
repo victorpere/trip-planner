@@ -5,6 +5,7 @@ import Trip from "../../models/Trip";
 import ItemDetails from "../Items/ItemDetails";
 import { ItemType } from "../../config/enums";
 import { Item } from "../../models/Item";
+import Overlay from "../elements/Overlay/Overlay";
 
 type Props = {
   tripId?: string;
@@ -30,9 +31,10 @@ const TripDetails = (props: Props) => {
 
   const undoHandler = () => {
     setTripUpdateHistory((prev) => {
-      const previousTripVersion = prev.pop();
+      const newTripUpdateHistory = [ ...prev ];
+      const previousTripVersion = newTripUpdateHistory.pop();
       previousTripVersion && setTrip(previousTripVersion);
-      return prev;
+      return newTripUpdateHistory;
     });
   };
 
@@ -56,7 +58,7 @@ const TripDetails = (props: Props) => {
     return null;
   }
 
-  if (isLoading) {
+  if (!trip && isLoading) {
     return <div>LOADING TRIP DETAILS</div>;
   }
 
@@ -66,7 +68,12 @@ const TripDetails = (props: Props) => {
 
   if (trip) {
     return (
-      <div>
+      <>
+        {isLoading && (
+          <Overlay>
+            <div>Loading...</div>
+          </Overlay>
+        )}
         {editable && isTripUpdated && (
           <>
             <div className="float-right">
@@ -83,7 +90,7 @@ const TripDetails = (props: Props) => {
           editable={editable}
           onUpdate={tripUpdateHandler}
         />
-      </div>
+      </>
     );
   }
 
