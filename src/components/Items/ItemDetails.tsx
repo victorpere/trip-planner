@@ -12,6 +12,7 @@ type Props = {
   onDelete?: (itemId: string) => void;
   onUpdate?: (item: Item) => void;
   onCreateGroup?: (itemId: string, newItems: Item[]) => void;
+  onAddItem?: (item: Item, deletedItemId?: string) => void;
 };
 
 const ItemDetails = (props: Props) => {
@@ -23,7 +24,7 @@ const ItemDetails = (props: Props) => {
   };
 
   const updateHandler = (item: Item, push?: boolean) => {
-    console.log("ItemDetails updateHandler", props.item.uuid);
+    console.log("ItemDetails updateHandler", item);
     props.onUpdate && props.onUpdate(item);
   };
 
@@ -35,6 +36,14 @@ const ItemDetails = (props: Props) => {
       props.onCreateGroup(props.item.uuid, newItems);
   };
 
+  const addItemAndDeleteHandler = (newItem: Item) => {
+    console.log("ItemDetails addItemHandler", newItem);
+    props.editable &&
+      props.onAddItem &&
+      props.item.uuid &&
+      props.onAddItem(newItem, props.item.uuid);
+  };
+
   return (
     <ItemDetalsComponent
       tripId={props.tripId}
@@ -44,6 +53,7 @@ const ItemDetails = (props: Props) => {
       onDelete={deleteHandler}
       onUpdate={updateHandler}
       onCreateGroup={createGroupHandler}
+      onAddItemAndDelete={addItemAndDeleteHandler}
     />
   );
 };

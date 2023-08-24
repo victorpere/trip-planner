@@ -20,6 +20,7 @@ const TripDetails = (props: Props) => {
   const isTripUpdated = tripUpdateHistory.length > 0;
 
   const setTripAndEditable = (updatedTrip?: Trip, editable?: boolean) => {
+    console.log("TripDetails setTripAndEditable", updatedTrip);
     setTrip(updatedTrip);
     setEditable(editable ?? false);
   };
@@ -31,7 +32,7 @@ const TripDetails = (props: Props) => {
 
   const undoHandler = () => {
     setTripUpdateHistory((prev) => {
-      const newTripUpdateHistory = [ ...prev ];
+      const newTripUpdateHistory = [...prev];
       const previousTripVersion = newTripUpdateHistory.pop();
       previousTripVersion && setTrip(previousTripVersion);
       return newTripUpdateHistory;

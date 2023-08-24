@@ -7,25 +7,27 @@ import styles from "./ItemGroupAltDetails.module.css";
 import ItemList from "../ItemList";
 import { ItemType } from "../../../config/enums";
 import GroupAlternatives from "../../../models/GroupAlternatives";
+import { Item } from "../../../models/Item";
 
 const ItemGroupAltDetails = (props: ItemDetailProps) => {
   const itemGroupAlt = props.item as GroupAlternatives;
 
-  const deleteItemHandler = (deletedItemId: string) => {
-    console.log("ItemGroupAltDetails deleteItemHandler", deletedItemId);
-    if (props.editable && props.onUpdate && props.tripId) {
-      const updatedItemGroupAlt = {
-        ...itemGroupAlt,
-        items: itemGroupAlt.items.filter((item) => item.uuid !== deletedItemId),
-      };
-
-      if (updatedItemGroupAlt.items.length === 0) {
+  const updateItemListHandler = (updatedItems?: Item[]) => {
+    console.log("ItemGroupAltDetails updateItemListHandler", updatedItems);
+    if (props.editable && props.onUpdate) {
+      if (!updatedItems || updatedItems.length === 0) {
         props.onDelete && props.onDelete();
-      } else if (updatedItemGroupAlt.items.length === 1) {
-        // TODO: move remaining item one level up and delete self
-        props.onUpdate(updatedItemGroupAlt);
+      } else if (updatedItems.length === 1) {
+        // move remaining item one level up and delete self
+        if (props.onAddItemAndDelete && props.onDelete) {
+          props.onAddItemAndDelete(updatedItems[0]);
+        } else {
+          const updatedGroup = { ...props.item, items: updatedItems };
+          props.onUpdate && props.onUpdate(updatedGroup);
+        }
       } else {
-        props.onUpdate(updatedItemGroupAlt);
+        const updatedGroup = { ...props.item, items: updatedItems };
+        props.onUpdate && props.onUpdate(updatedGroup);
       }
     }
   };
@@ -44,7 +46,7 @@ const ItemGroupAltDetails = (props: ItemDetailProps) => {
           items={itemGroupAlt.items}
           parentItemType={ItemType.groupAlt}
           editable={props.editable}
-          onDeleteItem={deleteItemHandler}
+          onUpdate={updateItemListHandler}
         />
       </Card>
     </>

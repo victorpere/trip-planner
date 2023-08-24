@@ -9,4 +9,5 @@ export type ItemDetailProps = {
   onUpdate?: (item: Item) => void;
   onDelete?: () => void;
   onCreateGroup?: (newItems: Item[]) => void;
+  onAddItemAndDelete?: (item: Item) => void;
 };
