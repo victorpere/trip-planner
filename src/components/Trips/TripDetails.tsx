@@ -87,6 +87,7 @@ const TripDetails = (props: Props) => {
         )}
         <ItemDetails
           item={{ ...trip, type: ItemType.trip }}
+          index={0}
           parentItemType={ItemType.trip}
           editable={editable}
           onUpdate={tripUpdateHandler}

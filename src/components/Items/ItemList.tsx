@@ -16,24 +16,20 @@ type ItemListProps = {
 };
 
 const ItemList = (props: ItemListProps) => {
-  const deleteItemHandler = (itemId: string) => {
-    console.log("ItemList deleteItemHandler", itemId);
-    if (props.editable && props.items && props.onUpdate) {
-      const itemIndex = props.items.findIndex((item) => item.uuid === itemId);
-      console.log("itemIndex", itemIndex);
-      if (itemIndex >= 0) {
-        const updatedItems = [...props.items];
-        updatedItems.splice(itemIndex, 1);
-        console.log("updatedItems", updatedItems);
-        props.onUpdate(updatedItems);
-      }
+  const deleteItemHandler = (itemIndex: number) => {
+    console.log("ItemList deleteItemHandler", itemIndex);
+    if (props.editable && props.items && props.onUpdate && itemIndex >= 0) {
+      const updatedItems = [...props.items];
+      updatedItems.splice(itemIndex, 1);
+      console.log("updatedItems", updatedItems);
+      props.onUpdate(updatedItems);
     }
   };
 
   const updateItemHandler = (updatedItem: Item) => {
+    // TODO: add index parameter
     console.log("ItemList udpateItemHandler", updatedItem.uuid);
     if (props.editable && props.items && props.onUpdate) {
-      // TODO: find item in the list and update
       if (updatedItem.uuid) {
         const itemIndex = props.items.findIndex(
           (item) => item.uuid === updatedItem.uuid
@@ -45,36 +41,34 @@ const ItemList = (props: ItemListProps) => {
     }
   };
 
-  const createGroupHandler = (itemId: string, newItems: Item[]) => {
-    console.log("ItemList createGroupHandler", itemId);
+  const createGroupHandler = (itemIndex: number, newItems: Item[]) => {
+    console.log("ItemList createGroupHandler", itemIndex);
     if (props.editable && props.items && props.onUpdate) {
-      const item = props.items.find((item) => item.uuid === itemId);
+      const item = props.items[itemIndex];
       if (item) {
-        const itemIndex = props.items?.indexOf(item);
         const updatedItems = [...props.items];
 
         const newGroup: GroupAlternatives = {
           type: ItemType.groupAlt,
           items: [item, ...newItems],
         };
-        updatedItems.splice(itemIndex, 1, newGroup);
 
+        console.log("newGroup", newGroup);
+        updatedItems.splice(itemIndex, 1, newGroup);
         props.onUpdate(updatedItems);
       }
     }
   };
 
-  const addItemHandler = (newItem: Item, deletedItemId?: string) => {
+  const addItemHandler = (newItem: Item, deletedItemIndex?: number) => {
     console.log("ItemList addItemHandler", newItem);
     if (props.editable && props.onUpdate) {
       if (!props.items) {
         props.onUpdate([newItem]);
       } else {
         const updatedItems = [...props.items, newItem];
-        const deletedItemIndex = updatedItems.findIndex(
-          (item) => item.uuid === deletedItemId
-        );
-        if (deletedItemIndex >= 0) {
+
+        if (deletedItemIndex !== undefined && deletedItemIndex >= 0) {
           updatedItems.splice(deletedItemIndex, 1);
         }
         props.onUpdate(updatedItems);
@@ -83,11 +77,12 @@ const ItemList = (props: ItemListProps) => {
   };
 
   const itemList: JSX.Element[] = props.items
-    ? props.items?.map((item) => (
+    ? props.items?.map((item, index) => (
         <ItemDetails
           key={item.uuid ?? uuidv4()}
           tripId={props.tripId}
           item={item}
+          index={index}
           parentItemType={props.parentItemType}
           editable={props.editable}
           onDelete={deleteItemHandler}

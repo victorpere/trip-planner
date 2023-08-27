@@ -21,19 +21,26 @@ const ItemTripDetails = (props: ItemDetailProps) => {
     if (props.editable && props.onUpdate && trip.uuid) {
       const setNewItemId = (newItemId?: string) => {
         newItem.uuid = newItemId;
-      }
+      };
 
-      createItem(trip.uuid, "trip", trip.uuid, "items", newItem, setNewItemId).then(() => {
+      createItem(
+        trip.uuid,
+        "trip",
+        trip.uuid,
+        "items",
+        newItem,
+        setNewItemId
+      ).then(() => {
         let updatedItems: Item[];
         if (trip.items) {
           updatedItems = [...trip.items, newItem];
         } else {
           updatedItems = [newItem];
         }
-  
-        const updatedTrip = { ...trip, items: updatedItems};
+
+        const updatedTrip = { ...trip, items: updatedItems };
         props.onUpdate && props.onUpdate(updatedTrip);
-      })  
+      });
     }
   };
 
