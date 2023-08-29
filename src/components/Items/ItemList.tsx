@@ -26,7 +26,7 @@ const ItemList = (props: ItemListProps) => {
     }
   };
 
-  const updateItemHandler = (updatedItem: Item) => {
+  const updateItemHandler = (updatedItem: Item, itemIndex: number) => {
     // TODO: add index parameter
     console.log("ItemList udpateItemHandler", updatedItem.uuid);
     if (props.editable && props.items && props.onUpdate) {

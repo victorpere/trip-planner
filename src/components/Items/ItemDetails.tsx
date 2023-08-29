@@ -11,7 +11,7 @@ type Props = {
   editable: boolean;
   tripId?: string;
   onDelete?: (itemIndex: number) => void;
-  onUpdate?: (item: Item) => void;
+  onUpdate?: (item: Item, itemIndex: number) => void;
   onCreateGroup?: (itemIndex: number, newItems: Item[]) => void;
   onAddItem?: (item: Item, deletedItemIndex?: number) => void;
 };
@@ -24,9 +24,9 @@ const ItemDetails = (props: Props) => {
     props.onDelete && props.onDelete(props.index);
   };
 
-  const updateHandler = (item: Item, push?: boolean) => {
-    console.log("ItemDetails updateHandler", item);
-    props.onUpdate && props.onUpdate(item);
+  const updateHandler = (updatedItem: Item, push?: boolean) => {
+    console.log("ItemDetails updateHandler", updatedItem);
+    props.onUpdate && props.onUpdate(updatedItem, props.index);
   };
 
   const createGroupHandler = (newItems: Item[]) => {
