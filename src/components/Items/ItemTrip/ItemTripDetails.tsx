@@ -9,38 +9,23 @@ import ItemList from "../ItemList";
 import { activityCreator } from "../../../models/Activity";
 import { ItemType } from "../../../config/enums";
 import { ItemDetailProps } from "../props.type";
-import { useTripItemService } from "../../../hooks/useTripItemService";
 
 const ItemTripDetails = (props: ItemDetailProps) => {
-  const { createItem } = useTripItemService();
   const trip = props.item as Trip;
 
   const createItemHandler = (newItem: Item) => {
     console.log("ItemTripDetails createItemHandler", newItem);
 
-    if (props.editable && props.onUpdate && trip.uuid) {
-      const setNewItemId = (newItemId?: string) => {
-        newItem.uuid = newItemId;
-      };
+    if (props.editable && props.onUpdate) {
+      let updatedItems: Item[];
+      if (trip.items) {
+        updatedItems = [...trip.items, newItem];
+      } else {
+        updatedItems = [newItem];
+      }
 
-      createItem(
-        trip.uuid,
-        "trip",
-        trip.uuid,
-        "items",
-        newItem,
-        setNewItemId
-      ).then(() => {
-        let updatedItems: Item[];
-        if (trip.items) {
-          updatedItems = [...trip.items, newItem];
-        } else {
-          updatedItems = [newItem];
-        }
-
-        const updatedTrip = { ...trip, items: updatedItems };
-        props.onUpdate && props.onUpdate(updatedTrip);
-      });
+      const updatedTrip = { ...trip, items: updatedItems };
+      props.onUpdate(updatedTrip);
     }
   };
 

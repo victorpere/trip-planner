@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import useClickOutside from "./useOutsideClick";
 
@@ -47,6 +47,10 @@ const EditableText = (props: Props) => {
       props.onChange(props.fieldName, event.target.value);
     }
   };
+
+  useEffect(() => {
+    setText(props.text ?? "")
+  }, [props.text])
 
   return (
     <span ref={mainSpanRef} className={props.className}>
