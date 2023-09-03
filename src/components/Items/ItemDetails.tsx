@@ -3,52 +3,44 @@ import React from "react";
 import { Item } from "../../models/Item";
 import { itemDetailsComponent } from "./utilities";
 import { ItemType } from "../../config/enums";
-import { useTripItemService } from "../../hooks/useTripItemService";
 
 type Props = {
   item: Item;
+  index: number;
   parentItemType: ItemType;
   editable: boolean;
   tripId?: string;
-  onDelete?: (itemId: string) => void;
-  onUpdate?: (item: Item) => void;
-  onCreateGroup?: (itemId: string, newItems: Item[]) => void;
+  onDelete?: (itemIndex: number) => void;
+  onUpdate?: (item: Item, itemIndex: number) => void;
+  onCreateGroup?: (itemIndex: number, newItems: Item[]) => void;
+  onAddItem?: (item: Item, deletedItemIndex?: number) => void;
 };
 
 const ItemDetails = (props: Props) => {
-  const { updateItem, deleteItem } = useTripItemService();
   const ItemDetalsComponent = itemDetailsComponent(props.item.type);
 
   const deleteHandler = () => {
     console.log("ItemDetails deleteHandler", props.item.uuid);
-
-    if (props.editable && props.item.uuid && props.tripId) {
-      deleteItem(props.tripId, "items", props.item.uuid).then(() => {
-        props.onDelete && props.item.uuid && props.onDelete(props.item.uuid);
-      });
-    }
+    props.onDelete && props.onDelete(props.index);
   };
 
-  const updateHandler = (item: Item, push?: boolean) => {
-    console.log("ItemDetails updateHandler", props.item.uuid);
-
-    if (props.editable && props.item.uuid && props.tripId && item.uuid) {
-      if (push) {
-        updateItem(props.tripId, "items", item.uuid, item).then(() => {
-          props.onUpdate && props.onUpdate(item);
-        });
-      } else {
-        props.onUpdate && props.onUpdate(item);
-      }
-    }
+  const updateHandler = (updatedItem: Item, push?: boolean) => {
+    console.log("ItemDetails updateHandler", updatedItem);
+    props.onUpdate && props.onUpdate(updatedItem, props.index);
   };
 
   const createGroupHandler = (newItems: Item[]) => {
     console.log("ItemDetails createNewGroupHandler", newItems);
     props.editable &&
       props.onCreateGroup &&
-      props.item.uuid &&
-      props.onCreateGroup(props.item.uuid, newItems);
+      props.onCreateGroup(props.index, newItems);
+  };
+
+  const addItemAndDeleteHandler = (newItem: Item) => {
+    console.log("ItemDetails addItemHandler", newItem);
+    props.editable &&
+      props.onAddItem &&
+      props.onAddItem(newItem, props.index);
   };
 
   return (
@@ -60,6 +52,7 @@ const ItemDetails = (props: Props) => {
       onDelete={deleteHandler}
       onUpdate={updateHandler}
       onCreateGroup={createGroupHandler}
+      onAddItemAndDelete={addItemAndDeleteHandler}
     />
   );
 };

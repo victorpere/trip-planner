@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import { useTripItemService } from "../../../hooks/useTripItemService";
 import { Item } from "../../../models/Item";
 import Trip from "../../../models/Trip";
 import { Activity } from "../../../models/Activity";
@@ -10,102 +9,34 @@ import ItemList from "../ItemList";
 import { activityCreator } from "../../../models/Activity";
 import { ItemType } from "../../../config/enums";
 import { ItemDetailProps } from "../props.type";
-import GroupAlternatives from "../../../models/GroupAlternatives";
-import useTripService from "../../../hooks/useTripService";
 
 const ItemTripDetails = (props: ItemDetailProps) => {
-  const [trip, setTrip] = useState<Trip>(props.item as Trip);
-  const { createItem } = useTripItemService();
-  const { updateTrip } = useTripService();
+  const trip = props.item as Trip;
 
   const createItemHandler = (newItem: Item) => {
-    const processItem = (itemId?: string) => {
-      if (itemId) {
-        newItem.uuid = itemId;
+    console.log("ItemTripDetails createItemHandler", newItem);
 
-        setTrip((prev) => {
-          let newItems: Item[];
-          if (trip.items) {
-            newItems = [...trip.items, newItem];
-          } else {
-            newItems = [newItem];
-          }
-
-          return { ...prev, items: newItems };
-        });
+    if (props.editable && props.onUpdate) {
+      let updatedItems: Item[];
+      if (trip.items) {
+        updatedItems = [...trip.items, newItem];
+      } else {
+        updatedItems = [newItem];
       }
-    };
 
-    if (trip.uuid) {
-      createItem(trip.uuid, "trip", trip.uuid, "items", newItem, processItem);
+      const updatedTrip = { ...trip, items: updatedItems };
+      props.onUpdate(updatedTrip);
     }
   };
 
-  const deleteItemHandler = (deletedItemId: string) => {
-    console.log("ItemTripDetails deleteItemHandler", deletedItemId);
-    setTrip((prev) => {
-      return {
-        ...prev,
-        items: prev.items?.filter((item) => item.uuid !== deletedItemId),
-      };
-    });
-  };
-
-  const updateItemHandler = (updatedItem: Item) => {
-    console.log("ItemTripDetails updateItemHandler", updatedItem);
-    setTrip((prev) => {
-      if (
-        prev.uuid &&
-        prev.items &&
-        prev.items.find((item) => item.uuid && item.uuid === updatedItem.uuid)
-      ) {
-        const updatedTrip = {
-          ...prev,
-          items: [
-            ...prev.items.filter((item) => item.uuid !== updatedItem.uuid),
-            updatedItem,
-          ],
-        };
-
-        return updatedTrip;
-      }
-      return prev;
-    });
-  };
-
-  const createGroupHandler = (itemId: String, newItems: Item[]) => {
-    console.log("ItemTripDetails createGroupHandler", itemId);
-    // TODO: create new group and add old and new items to it
-
-    if (trip.items) {
-      const oldItem = trip.items.find((i) => i.uuid === itemId);
-
-      if (oldItem) {
-        const newGroup: GroupAlternatives = {
-          type: ItemType.groupAlt,
-          items: [oldItem, ...newItems],
-        };
-
-        const updatedTrip = {
-          ...trip,
-          items: [...trip.items.filter((i) => i.uuid !== itemId), newGroup],
-        };
-
-        updateTrip(updatedTrip, setTrip).then(() => {
-          console.log(
-            "ItemTripDetails createGroupHandler",
-            "trip updated",
-            updatedTrip
-          );
-        });
-      }
+  const updateItemListHandler = (items?: Item[]) => {
+    console.log("ItemTripDetails updateItemListHanlder", items);
+    if (props.editable && props.onUpdate) {
+      const updatedTrip = { ...trip, items: items };
+      console.log("updatedTrip", updatedTrip);
+      props.onUpdate(updatedTrip);
     }
   };
-
-  useEffect(() => {
-    console.log("ItemTripDetails useEffect");
-    console.log(trip);
-  }, [trip]);
 
   return (
     <Card>
@@ -123,9 +54,7 @@ const ItemTripDetails = (props: ItemDetailProps) => {
         parentItemType={ItemType.trip}
         items={trip.items}
         editable={props.editable}
-        onDeleteItem={deleteItemHandler}
-        onUpdateItem={updateItemHandler}
-        onCreateGroup={createGroupHandler}
+        onUpdate={updateItemListHandler}
       />
     </Card>
   );

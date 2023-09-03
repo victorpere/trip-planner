@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { FaTrashAlt } from "react-icons/fa";
 
-import { useTripItemService } from "../../../hooks/useTripItemService";
 import ActionDialog from "../../Common/ActionDialog";
 import Card from "../../Cards/Card";
 import EditableText from "../../elements/EditableText/EditableText";
@@ -13,26 +12,18 @@ import styles from "./ItemDetails.module.css";
 import { ItemType } from "../../../config/enums";
 import ItemActivityNew from "./ItemActivityNew";
 import { Activity } from "../../../models/Activity";
+import { Item } from "../../../models/Item";
 
 const ItemActivityDetails = (props: ItemDetailProps) => {
   const [deleting, setDeleting] = useState<boolean>(false);
   const [creatingAlt, setCreatingAlt] = useState<boolean>(false);
-  const { patchItem } = useTripItemService();
 
   const didEditText = (key: string, text?: string) => {
     console.log("Edited ", key, " to value ", text);
-    if (props.tripId && props.item.uuid && text) {
-      patchItem(props.tripId, "items", props.item.uuid, {
-        uuid: props.item.uuid,
-        type: props.item.type,
-        name: text,
-      }).then(() => {
-        console.log("updated db");
-        props.editable &&
-          props.onUpdate &&
-          props.onUpdate({ ...props.item, name: text });
-      });
-    }
+    const updatedItem: {[index: string]: any} = {...props.item};
+    updatedItem[key] = text;
+
+    props.editable && props.onUpdate && props.onUpdate(updatedItem as Item);
   };
 
   const deleteButtonHandler = () => {
@@ -89,7 +80,7 @@ const ItemActivityDetails = (props: ItemDetailProps) => {
         <div className="clearfix">
           <div className="float-left">
             <EditableText
-              fieldName="itemName"
+              fieldName="name"
               editable={props.editable ?? false}
               text={props.item.name}
               onFinishedEditing={didEditText}
