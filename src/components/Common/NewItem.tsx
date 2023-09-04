@@ -59,7 +59,9 @@ const NewItem = <T extends Item>(props: Props<T>) => {
 
   return (
     <Card>
-      <button onClick={addButtonClickHandler}>ADD</button>
+      <button onClick={addButtonClickHandler}>
+        {props.label ?? "ADD ITEM"}
+      </button>
     </Card>
   );
 };

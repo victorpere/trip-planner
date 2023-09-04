@@ -6,6 +6,8 @@ import { Item } from "../../models/Item";
 import { itemListComponent } from "./utilities";
 import { ItemType } from "../../config/enums";
 import GroupAlternatives from "../../models/GroupAlternatives";
+import { Activity, activityCreator } from "../../models/Activity";
+import NewItem from "../Common/NewItem";
 
 type ItemListProps = {
   editable: boolean;
@@ -27,7 +29,6 @@ const ItemList = (props: ItemListProps) => {
   };
 
   const updateItemHandler = (updatedItem: Item, itemIndex: number) => {
-    // TODO: add index parameter
     console.log("ItemList udpateItemHandler", updatedItem.uuid);
     if (props.editable && props.items && props.onUpdate) {
       if (updatedItem.uuid) {
@@ -95,7 +96,18 @@ const ItemList = (props: ItemListProps) => {
 
   let ListComponent = itemListComponent(props.parentItemType);
 
-  return <ListComponent>{itemList}</ListComponent>;
+  return (
+    <>
+      {props.editable && (
+        <NewItem<Activity>
+          createItem={activityCreator}
+          onCreateNewItem={addItemHandler}
+          label="Add Activity"
+        />
+      )}
+      <ListComponent>{itemList}</ListComponent>
+    </>
+  );
 };
 
 export default ItemList;
