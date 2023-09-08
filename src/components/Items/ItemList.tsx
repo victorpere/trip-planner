@@ -31,9 +31,6 @@ const ItemList = (props: ItemListProps) => {
   const updateItemHandler = (updatedItem: Item, itemIndex: number) => {
     console.log("ItemList udpateItemHandler", updatedItem, itemIndex);
     if (props.editable && props.items && props.onUpdate) {
-      const itemIndex = props.items.findIndex(
-        (item) => item.uuid === updatedItem.uuid
-      );
       const updatedItems = [...props.items];
       updatedItems.splice(itemIndex, 1, updatedItem);
       props.onUpdate(updatedItems);
