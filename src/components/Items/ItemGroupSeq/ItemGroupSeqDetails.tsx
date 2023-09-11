@@ -8,8 +8,16 @@ import ItemList from "../ItemList";
 import GroupSequence from "../../../models/GroupSequence";
 import { FaTrashAlt } from "react-icons/fa";
 import { ItemType } from "../../../config/enums";
+import { Item } from "../../../models/Item";
 
 const ItemGroupSeqDetails = (props: ItemDetailProps) => {
+  const itemsUpdateHandler = (updatedItems?: Item[]) => {
+    if (props.editable && props.onUpdate) {
+      const updatedGroup = { ...props.item, items: updatedItems };
+      props.onUpdate(updatedGroup);
+    }
+  };
+
   return (
     <>
       <Card className={styles["item-group-seq"]}>
@@ -26,6 +34,7 @@ const ItemGroupSeqDetails = (props: ItemDetailProps) => {
           items={(props.item as GroupSequence).items}
           parentItemType={ItemType.groupSeq}
           editable={props.editable}
+          onUpdate={itemsUpdateHandler}
         />
       </Card>
     </>

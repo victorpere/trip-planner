@@ -8,6 +8,9 @@ import { ItemType } from "../../config/enums";
 import GroupAlternatives from "../../models/GroupAlternatives";
 import { Activity, activityCreator } from "../../models/Activity";
 import NewItem from "../Common/NewItem";
+import GroupSequence, {
+  groupSequenceCreator,
+} from "../../models/GroupSequence";
 
 type ItemListProps = {
   editable: boolean;
@@ -93,6 +96,13 @@ const ItemList = (props: ItemListProps) => {
 
   return (
     <>
+      {props.editable && (
+        <NewItem<GroupSequence>
+          createItem={groupSequenceCreator}
+          onCreateNewItem={addItemHandler}
+          label="Add Section"
+        />
+      )}
       {props.editable && (
         <NewItem<Activity>
           createItem={activityCreator}
