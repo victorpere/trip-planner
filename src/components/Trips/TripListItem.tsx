@@ -10,7 +10,8 @@ import styles from "./Trips.module.css";
 
 type Props = {
   trip: Trip;
-  onTripDelete: (tripId: string) => void;
+  editable: boolean;
+  onTripDelete?: (tripId: string) => void;
 };
 
 const TripListItem = (props: Props) => {
@@ -18,15 +19,15 @@ const TripListItem = (props: Props) => {
   const [deleting, setDeleting] = useState(false);
 
   const deleteConfirmButtonHandler = () => {
-    if (props.trip.uuid) {
+    if (props.editable && props.trip.uuid) {
       deleteTrip(props.trip.uuid).then(() => {
-        props.onTripDelete(props.trip.uuid!);
+        props.onTripDelete && props.onTripDelete(props.trip.uuid!);
       });
     }
   };
 
   const deleteButtonHandler = () => {
-    setDeleting(true);
+    props.editable && setDeleting(true);
   };
 
   const deleteDialog = (
@@ -50,7 +51,7 @@ const TripListItem = (props: Props) => {
         leftContent={
           <Link to={`trip/${props.trip.uuid}`}>{props.trip.name}</Link>
         }
-        rightContent={<FaTrashAlt onClick={deleteButtonHandler} />}
+        rightContent={props.editable && <FaTrashAlt onClick={deleteButtonHandler} />}
       />
     </>
   );

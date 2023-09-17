@@ -50,7 +50,7 @@ const OwnTrips = () => {
 
   return (
     <Card>
-      <TripList trips={trips} onDeleteTrip={deleteTripHandler} />
+      <TripList trips={trips} editable={true} onDeleteTrip={deleteTripHandler} />
       <NewTrip
         onCreateTrip={createTripHandler}
         onUpdateTrip={updateTripHandler}
