@@ -4,12 +4,9 @@ import {
   IoIosArrowDroprightCircle,
 } from "react-icons/io";
 import styles from "./HorizontalList.module.css";
+import { ListProps } from "./props.type";
 
-type Props = {
-  children: JSX.Element[];
-};
-
-const HorizontalList = (props: Props) => {
+const HorizontalList = (props: ListProps) => {
   const container = useRef<HTMLDivElement>(null);
   const crop = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);

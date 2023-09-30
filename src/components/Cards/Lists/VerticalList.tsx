@@ -1,12 +1,7 @@
 import React from "react";
+import { ListProps } from "./props.type";
 
-type Props = {
-  children: JSX.Element[];
-  className?: string;
-  childClassName?: string;
-};
-
-const VerticalList = (props: Props) => {
+const VerticalList = (props: ListProps) => {
   return (
     <div className={props.className}>
       {props.children.map((child, index) => (

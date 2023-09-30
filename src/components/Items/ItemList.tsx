@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import ItemDetails from "./ItemDetails";
 import { Item } from "../../models/Item";
-import { itemListComponent } from "./utilities";
 import { ItemType } from "../../config/enums";
 import GroupAlternatives from "../../models/GroupAlternatives";
 import { Activity, activityCreator } from "../../models/Activity";
@@ -11,6 +10,7 @@ import NewItem from "../Common/NewItem";
 import GroupSequence, {
   groupSequenceCreator,
 } from "../../models/GroupSequence";
+import { ListProps } from "../Cards/Lists/props.type";
 
 type ItemListProps = {
   editable: boolean;
@@ -18,6 +18,7 @@ type ItemListProps = {
   items?: Item[];
   parentItemType: ItemType;
   onUpdate?: (items?: Item[]) => void;
+  listComponent: (props: ListProps) => JSX.Element;
 };
 
 const ItemList = (props: ItemListProps) => {
@@ -92,8 +93,6 @@ const ItemList = (props: ItemListProps) => {
       ))
     : [];
 
-  let ListComponent = itemListComponent(props.parentItemType);
-
   return (
     <>
       {props.editable && (
@@ -110,7 +109,7 @@ const ItemList = (props: ItemListProps) => {
           label="Add Activity"
         />
       )}
-      <ListComponent>{itemList}</ListComponent>
+      <props.listComponent>{itemList}</props.listComponent>
     </>
   );
 };

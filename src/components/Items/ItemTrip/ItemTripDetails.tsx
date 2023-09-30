@@ -6,6 +6,7 @@ import Card from "../../Cards/Card";
 import ItemList from "../ItemList";
 import { ItemType } from "../../../config/enums";
 import { ItemDetailProps } from "../props.type";
+import VerticalList from "../../Cards/Lists/VerticalList";
 
 const ItemTripDetails = (props: ItemDetailProps) => {
   const trip = props.item as Trip;
@@ -29,6 +30,7 @@ const ItemTripDetails = (props: ItemDetailProps) => {
         items={trip.items}
         editable={props.editable}
         onUpdate={updateItemListHandler}
+        listComponent={VerticalList}
       />
     </Card>
   );

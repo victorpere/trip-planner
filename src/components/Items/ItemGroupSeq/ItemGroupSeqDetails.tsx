@@ -9,6 +9,7 @@ import GroupSequence from "../../../models/GroupSequence";
 import { FaTrashAlt } from "react-icons/fa";
 import { ItemType } from "../../../config/enums";
 import { Item } from "../../../models/Item";
+import VerticalList from "../../Cards/Lists/VerticalList";
 
 const ItemGroupSeqDetails = (props: ItemDetailProps) => {
   const itemsUpdateHandler = (updatedItems?: Item[]) => {
@@ -35,6 +36,7 @@ const ItemGroupSeqDetails = (props: ItemDetailProps) => {
           parentItemType={ItemType.groupSeq}
           editable={props.editable}
           onUpdate={itemsUpdateHandler}
+          listComponent={VerticalList}
         />
       </Card>
     </>

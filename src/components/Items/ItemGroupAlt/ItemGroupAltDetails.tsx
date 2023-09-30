@@ -8,6 +8,7 @@ import ItemList from "../ItemList";
 import { ItemType } from "../../../config/enums";
 import GroupAlternatives from "../../../models/GroupAlternatives";
 import { Item } from "../../../models/Item";
+import FlexItemList from "../../Cards/Lists/FlexItemList";
 
 const ItemGroupAltDetails = (props: ItemDetailProps) => {
   const itemGroupAlt = props.item as GroupAlternatives;
@@ -47,6 +48,7 @@ const ItemGroupAltDetails = (props: ItemDetailProps) => {
           parentItemType={ItemType.groupAlt}
           editable={props.editable}
           onUpdate={updateItemListHandler}
+          listComponent={FlexItemList}
         />
       </Card>
     </>

@@ -1,14 +1,9 @@
 import React from "react";
 
 import styles from "./FlexItemList.module.css";
+import { ListProps } from "./props.type";
 
-type Props = {
-  children: JSX.Element[];
-  className?: string;
-  childClassName?: string;
-};
-
-const FlexItemList = (props: Props) => {
+const FlexItemList = (props: ListProps) => {
   return (
     <div className={`${styles["list"]} ${props.className ?? ""}`}>
       {props.children.map((child, index) => (
