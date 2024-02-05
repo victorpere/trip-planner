@@ -12,8 +12,10 @@ const HorizontalList = (props: ListProps) => {
   const content = useRef<HTMLDivElement>(null);
   const platter = useRef<HTMLDivElement>(null);
   const [scrollerHeight, setScrollerHeight] = useState<number>(0);
-  const [scrollArrowRightOpacity, setScrollArrowRightOpacity] = useState<number>(0);
-  const [scrollArrowLeftOpacity, setScrollArrowLeftOpacity] = useState<number>(0);
+  const [scrollArrowRightVisible, setScrollArrowRightVisible] =
+    useState<boolean>(false);
+  const [scrollArrowLeftVisible, setScrollArrowLeftVisible] =
+    useState<boolean>(false);
 
   const scrollClickHandler = (direction: number) => {
     if (content.current) {
@@ -23,20 +25,12 @@ const HorizontalList = (props: ListProps) => {
 
   const setScrollArrowVisibility = () => {
     if (content.current && platter.current) {
-      if (
+      setScrollArrowRightVisible(
         platter.current.scrollWidth >
-        platter.current.offsetWidth + content.current.scrollLeft
-      ) {
-        setScrollArrowRightOpacity(0.5);
-      } else {
-        setScrollArrowRightOpacity(0);
-      }
+          platter.current.offsetWidth + content.current.scrollLeft
+      );
 
-      if (content.current.scrollLeft > 0) {
-        setScrollArrowLeftOpacity(0.5);
-      } else {
-        setScrollArrowLeftOpacity(0);
-      }
+      setScrollArrowLeftVisible(content.current.scrollLeft > 0);
     }
   };
 
@@ -63,10 +57,7 @@ const HorizontalList = (props: ListProps) => {
 
   return (
     <div ref={container} className={styles["scroller-container"]}>
-      <div
-        ref={crop}
-        className={styles["scroller-crop"]}
-      >
+      <div ref={crop} className={styles["scroller-crop"]}>
         <div ref={content} className={styles["scroller-content"]}>
           <div ref={platter} className={styles["scroller-platter"]}>
             {props.children.map((child, index) => (
@@ -84,8 +75,7 @@ const HorizontalList = (props: ListProps) => {
         style={{ top: scrollerHeight / 2 }}
       >
         <button
-          className={styles["scroller-button"]}
-          style={{ opacity: scrollArrowLeftOpacity }}
+          className={`${styles["scroller-button"]} ${scrollArrowLeftVisible && styles["visible"]}`}
           onClick={() => scrollClickHandler(-1)}
         >
           <IoIosArrowDropleftCircle />
@@ -96,8 +86,7 @@ const HorizontalList = (props: ListProps) => {
         style={{ top: scrollerHeight / 2 }}
       >
         <button
-          className={styles["scroller-button"]}
-          style={{ opacity: scrollArrowRightOpacity }}
+          className={`${styles["scroller-button"]} ${scrollArrowRightVisible && styles["visible"]}`}
           onClick={() => scrollClickHandler(1)}
         >
           <IoIosArrowDroprightCircle />

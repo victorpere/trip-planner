@@ -81,7 +81,12 @@
   transition: opacity 0.5s;
   transition: color 0.5s;
   cursor: pointer;
-  color: var(--text-color)
+  color: var(--text-color);
+  opacity: 0;
+}
+
+.scroller-button.visible {
+  opacity: 0.5;
 }
 
 .scroller-button:hover {
