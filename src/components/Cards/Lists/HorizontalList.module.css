@@ -12,6 +12,17 @@
   position: relative;
   white-space: nowrap;
   scroll-snap-type: x mandatory;
+
+  /* Hide scrollbar in Firefox */
+  scrollbar-width: none;
+
+  /* Hide scrollbar in IE and Edge */
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar in webkit */
+.scroller-content::-webkit-scrollbar {
+  display: none;
 }
 
 .scroller-platter {
@@ -68,6 +79,7 @@
   top: 50%;
   transform: translateY(-50%);
   transition: opacity 0.5s;
+  transition: color 0.5s;
   cursor: pointer;
   color: var(--text-color)
 }

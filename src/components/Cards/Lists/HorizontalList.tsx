@@ -12,8 +12,8 @@ const HorizontalList = (props: ListProps) => {
   const content = useRef<HTMLDivElement>(null);
   const platter = useRef<HTMLDivElement>(null);
   const [scrollerHeight, setScrollerHeight] = useState<number>(0);
-  const [scrollArrowRight, setScrollArrowRight] = useState<number>(0);
-  const [scrollArrowLeft, setScrollArrowLeft] = useState<number>(0);
+  const [scrollArrowRightOpacity, setScrollArrowRightOpacity] = useState<number>(0);
+  const [scrollArrowLeftOpacity, setScrollArrowLeftOpacity] = useState<number>(0);
 
   const scrollClickHandler = (direction: number) => {
     if (content.current) {
@@ -21,27 +21,27 @@ const HorizontalList = (props: ListProps) => {
     }
   };
 
-  const setArrowVisibility = () => {
+  const setScrollArrowVisibility = () => {
     if (content.current && platter.current) {
       if (
         platter.current.scrollWidth >
         platter.current.offsetWidth + content.current.scrollLeft
       ) {
-        setScrollArrowRight(0.5);
+        setScrollArrowRightOpacity(0.5);
       } else {
-        setScrollArrowRight(0);
+        setScrollArrowRightOpacity(0);
       }
 
       if (content.current.scrollLeft > 0) {
-        setScrollArrowLeft(0.5);
+        setScrollArrowLeftOpacity(0.5);
       } else {
-        setScrollArrowLeft(0);
+        setScrollArrowLeftOpacity(0);
       }
     }
   };
 
   useEffect(() => {
-    setArrowVisibility();
+    setScrollArrowVisibility();
   }, [props.children]);
 
   useEffect(() => {
@@ -51,12 +51,12 @@ const HorizontalList = (props: ListProps) => {
 
     if (content.current) {
       let contentRef = content.current;
-      contentRef.addEventListener("scroll", setArrowVisibility, {
+      contentRef.addEventListener("scroll", setScrollArrowVisibility, {
         passive: true,
       });
 
       return () => {
-        contentRef.removeEventListener("scroll", setArrowVisibility);
+        contentRef.removeEventListener("scroll", setScrollArrowVisibility);
       };
     }
   }, []);
@@ -66,7 +66,6 @@ const HorizontalList = (props: ListProps) => {
       <div
         ref={crop}
         className={styles["scroller-crop"]}
-        style={{ height: scrollerHeight }}
       >
         <div ref={content} className={styles["scroller-content"]}>
           <div ref={platter} className={styles["scroller-platter"]}>
@@ -86,7 +85,7 @@ const HorizontalList = (props: ListProps) => {
       >
         <button
           className={styles["scroller-button"]}
-          style={{ opacity: scrollArrowLeft }}
+          style={{ opacity: scrollArrowLeftOpacity }}
           onClick={() => scrollClickHandler(-1)}
         >
           <IoIosArrowDropleftCircle />
@@ -98,7 +97,7 @@ const HorizontalList = (props: ListProps) => {
       >
         <button
           className={styles["scroller-button"]}
-          style={{ opacity: scrollArrowRight }}
+          style={{ opacity: scrollArrowRightOpacity }}
           onClick={() => scrollClickHandler(1)}
         >
           <IoIosArrowDroprightCircle />
