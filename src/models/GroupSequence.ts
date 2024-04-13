@@ -1,8 +1,7 @@
-import { Item } from "./Item";
+import { Group } from "./Group";
 
-export default interface GroupSequence extends Item {
+export default interface GroupSequence extends Group {
   type: "group-seq";
-  items: Item[];
 }
 
 export const groupSequenceCreator = (name: string): GroupSequence => {

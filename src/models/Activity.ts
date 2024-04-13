@@ -1,8 +1,8 @@
-import { Item } from "./Item";
+import { TripItem } from "./TripItem";
 
-export interface Activity extends Item {
+export interface Activity extends TripItem {
   type: "activity";
-  date?: Date;
+  activity?: string;
 }
 
 export const activityCreator = (name: string): Activity => {

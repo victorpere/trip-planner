@@ -1,6 +1,5 @@
-import { Item } from "./Item";
+import { Group } from "./Group";
 
-export default interface GroupAlternatives extends Item {
+export default interface GroupAlternatives extends Group {
   type: "group-alt";
-  items: Item[];
 }

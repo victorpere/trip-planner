@@ -1,11 +1,11 @@
-import { Item } from "./Item";
+import { Group } from "./Group";
+import { TripItem } from "./TripItem";
 
-export default interface Trip extends Item {
+export default interface Trip extends TripItem, Group {
   name: string;
   type: "trip";
-  items?: Item[];
 }
 
 export const tripCreator = (name: string): Trip => {
-  return { name: name, type: "trip" };
+  return { name: name, type: "trip", items: [] };
 };
