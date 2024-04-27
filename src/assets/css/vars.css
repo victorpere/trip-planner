@@ -4,10 +4,12 @@
 
   --border-raidus-01: 0.5rem;
   --margin-01: 0.25rem;
+  --padding-01: 0.5rem;
 
   --text-color: #000;
   --background-color: #fff;
   --hightlight-color: #94d6f9;
+  --border-color: #000;
 
   --warning-background-color: #ffcdcd;
 
@@ -20,7 +22,7 @@
 
   --trip-background-color: lightskyblue;
   --item-activity-background-color: aqua;
-  --item-group-seq-background-color: #353535;
+  --item-group-seq-background-color: #fff;
 
   --shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   --shadow-highlighted: 0 1px 4px rgb(60, 132, 215);
@@ -37,6 +39,7 @@
     --text-color: #eee;
     --background-color: #121212;
     --highlight-color: #fff;
+    --border-color: #fff;
 
     --warning-background-color: #321313;
 

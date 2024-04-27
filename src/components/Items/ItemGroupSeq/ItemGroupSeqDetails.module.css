@@ -1,4 +1,7 @@
 .item-group-seq {
   background-color: var(--item-group-seq-background-color);
-  padding: 0.5rem;
+  padding: var(--padding-01);
+  border-radius: var(--border-raidus-01);
+  border: 1px solid var(--border-color);
+  margin: var(--margin-01);
 }
