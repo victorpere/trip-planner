@@ -16,7 +16,7 @@ import { authHeader } from "./utilities";
 // FIXME: repetitive code
 
 export default class TripService implements ITripService {
-  private readonly baseUrl = process.env.REACT_APP_API_URL!;
+  private readonly baseUrl = import.meta.env.REACT_APP_API_URL!;
   private api: IApiService;
 
   constructor(api: IApiService) {
