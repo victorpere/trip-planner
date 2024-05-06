@@ -8,7 +8,7 @@ import { CreateItemResponse, BaseResponse } from "./types/response.type";
 import { authHeader } from "./utilities";
 
 export default class TripItemService implements ITripItemService {
-  private readonly baseUrl = process.env.REACT_APP_API_URL!;
+  private readonly baseUrl = import.meta.env.VITE_API_URL!;
   private apiService: IApiService;
 
   constructor(apiService: IApiService) {
