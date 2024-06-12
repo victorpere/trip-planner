@@ -6,10 +6,10 @@ import Card from "../../Cards/Card";
 import styles from "./ItemGroupSeqDetails.module.css";
 import ItemList from "../ItemList";
 import GroupSequence from "../../../models/GroupSequence";
-import { FaTrashAlt } from "react-icons/fa";
 import { ItemType } from "../../../config/enums";
 import { Item } from "../../../models/Item";
 import VerticalList from "../../Cards/Lists/VerticalList";
+import DeleteButton from "../../Common/DeleteButton";
 
 const ItemGroupSeqDetails = (props: ItemDetailProps) => {
   const itemsUpdateHandler = (updatedItems?: Item[]) => {
@@ -27,7 +27,13 @@ const ItemGroupSeqDetails = (props: ItemDetailProps) => {
             <div>{props.item.name}</div>
           </div>
           <div className="float-right button">
-            {props.editable && <FaTrashAlt />}
+            <DeleteButton
+              visible={props.editable && (props.item as GroupSequence).items.length === 0}
+              enabled={props.editable}
+              itemType={props.item.type}
+              itemName={props.item.name}
+              onConfirmDelete={props.onDelete}
+            />
           </div>
         </div>
         <ItemList
