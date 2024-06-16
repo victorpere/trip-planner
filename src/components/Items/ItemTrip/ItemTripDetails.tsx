@@ -22,8 +22,7 @@ const ItemTripDetails = (props: ItemDetailProps) => {
 
   return (
     <Card>
-      <div>TripDetails</div>
-      <div>{trip.name}</div>
+      <h2>{trip.name}</h2>
       <ItemList
         tripId={trip.uuid}
         parentItemType={ItemType.trip}
